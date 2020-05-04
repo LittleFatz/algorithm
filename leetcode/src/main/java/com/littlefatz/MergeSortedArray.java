@@ -1,6 +1,7 @@
 package com.littlefatz;
 
 //https://leetcode-cn.com/problems/merge-sorted-array/
+//从后往前双指针
 public class MergeSortedArray {
 
     public void merge(int[] nums1, int m, int[] nums2, int n) {
