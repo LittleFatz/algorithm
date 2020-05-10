@@ -4,7 +4,7 @@ package com.littlefatz;
 import java.util.Stack;
 
 //https://leetcode-cn.com/problems/largest-rectangle-in-histogram/
-//维系有序的栈，从底到顶递增
+//维系单调栈，从底到顶递增
 
 public class LargestRectangleInHistogram {
 
