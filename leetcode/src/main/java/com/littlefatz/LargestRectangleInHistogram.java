@@ -4,6 +4,7 @@ package com.littlefatz;
 import java.util.Stack;
 
 //https://leetcode-cn.com/problems/largest-rectangle-in-histogram/
+//和接雨水（TrappingRainWater）差不多的思想
 //维系单调栈，从底到顶递增
 
 public class LargestRectangleInHistogram {
