@@ -1,0 +1,54 @@
+package com.littlefatz;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+//https://leetcode-cn.com/problems/permutations/
+//回溯法，原理类似于深度优先遍历树，每次遍历到叶子节点后，需要回退到上一个状态
+public class Permutations {
+
+    private List<List<Integer>> results = new ArrayList<>();
+    private int size = 0;
+    private boolean[] used;
+
+    public List<List<Integer>> permute(int[] nums) {
+        if (nums.length == 0) {
+            return results;
+        }
+
+        this.size = nums.length;
+        used = new boolean[size];
+        LinkedList<Integer> current = new LinkedList<>();
+        backTrack(nums, 0, current);
+        return results;
+    }
+
+
+    private void backTrack(int[] nums, int depth, LinkedList<Integer> current) {
+
+        if (depth == size) {
+            results.add(new LinkedList<>(current));
+            return;
+        }
+
+        for (int i = 0; i < size; i++) {
+            if (used[i]) {
+                continue;
+            }
+
+            current.add(nums[i]);
+            used[i] = true;
+            backTrack(nums, depth+1, current);
+            current.removeLast();
+            used[i] = false;
+
+        }
+    }
+
+    public static void main(String[] args) {
+        Permutations test = new Permutations();
+        List<List<Integer>> results = test.permute(new int[]{1,2,3});
+        System.out.println(results.toString());
+    }
+}
