@@ -1,5 +1,7 @@
-package com.littlefatz;
+package com.littlefatz.tree;
 
+
+import com.littlefatz.tree.TreeNode;
 
 //https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/submissions/
 //注意子节点如果是null的话，深度为0，左右子树比较的话，应该排除这样的节点

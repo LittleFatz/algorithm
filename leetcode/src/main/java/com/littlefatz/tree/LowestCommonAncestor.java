@@ -1,5 +1,7 @@
-package com.littlefatz;
+package com.littlefatz.tree;
 
+
+import com.littlefatz.tree.TreeNode;
 
 //https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
 //递归判断是否包含p或者q

@@ -1,4 +1,4 @@
-package com.littlefatz;
+package com.littlefatz.greedy;
 
 // https://leetcode-cn.com/problems/coin-change/
 public class CoinChange {

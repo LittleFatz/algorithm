@@ -1,4 +1,6 @@
-package com.littlefatz;
+package com.littlefatz.tree;
+
+import com.littlefatz.tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

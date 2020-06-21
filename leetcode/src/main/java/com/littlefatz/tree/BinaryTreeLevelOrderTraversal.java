@@ -1,4 +1,4 @@
-package com.littlefatz;
+package com.littlefatz.tree;
 
 import java.util.*;
 

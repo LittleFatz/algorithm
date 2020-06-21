@@ -1,10 +1,5 @@
-package com.littlefatz;
+package com.littlefatz.tree;
 
-
-import sun.reflect.generics.tree.Tree;
-
-import java.util.HashMap;
-import java.util.Map;
 
 //https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 public class ConstuctBinaryTreeFromPreorderNInorderTraversal {

@@ -1,4 +1,6 @@
-package com.littlefatz;
+package com.littlefatz.tree;
+
+import com.littlefatz.tree.TreeNode;
 
 //https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
 public class MaxDepthOfBinaryTree {

@@ -1,7 +1,7 @@
-package com.littlefatz;
+package com.littlefatz.tree;
 
 
-import sun.reflect.generics.tree.Tree;
+import com.littlefatz.tree.TreeNode;
 
 import java.util.*;
 

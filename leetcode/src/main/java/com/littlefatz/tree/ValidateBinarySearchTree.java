@@ -1,8 +1,10 @@
-package com.littlefatz;
+package com.littlefatz.tree;
 
 
 //https://leetcode-cn.com/problems/validate-binary-search-tree/
 
+
+import com.littlefatz.tree.TreeNode;
 
 public class ValidateBinarySearchTree {
 
