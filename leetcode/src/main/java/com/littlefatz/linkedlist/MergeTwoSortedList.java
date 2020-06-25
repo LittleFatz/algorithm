@@ -1,5 +1,7 @@
-package com.littlefatz;
+package com.littlefatz.linkedlist;
 
+
+import com.littlefatz.ListNode;
 
 import java.util.List;
 import java.util.stream.Collectors;

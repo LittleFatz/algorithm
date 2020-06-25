@@ -1,4 +1,6 @@
-package com.littlefatz;
+package com.littlefatz.linkedlist;
+
+import com.littlefatz.ListNode;
 
 import java.util.HashSet;
 import java.util.List;

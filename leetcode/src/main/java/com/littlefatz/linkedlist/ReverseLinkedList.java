@@ -1,8 +1,10 @@
-package com.littlefatz;
+package com.littlefatz.linkedlist;
 
+
+import com.littlefatz.ListNode;
 
 /**
- * Definition for singly-linked list.
+ * Definition for singly-linked linkedlist.
  * public class ListNode {
  *     int val;
  *     ListNode next;

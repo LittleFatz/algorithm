@@ -1,8 +1,10 @@
-package com.littlefatz;
+package com.littlefatz.linkedlist;
 
 
 //https://leetcode-cn.com/problems/linked-list-cycle
 //快慢指针
+
+import com.littlefatz.ListNode;
 
 public class LinkedListCycle {
     public boolean hasCycle(ListNode head) {
