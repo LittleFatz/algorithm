@@ -1,6 +1,6 @@
 package com.littlefatz.dp;
 
-//https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/description/
+//https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/description/
 public class BestTimeToBuySellStockIII {
 
     public int maxProfit(int[] prices) {
