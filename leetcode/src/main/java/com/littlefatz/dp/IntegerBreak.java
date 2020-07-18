@@ -1,4 +1,4 @@
-package com.littlefatz;
+package com.littlefatz.dp;
 
 
 //https://leetcode-cn.com/problems/integer-break/
