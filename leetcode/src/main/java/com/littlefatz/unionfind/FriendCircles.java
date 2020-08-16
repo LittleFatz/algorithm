@@ -1,4 +1,4 @@
-package com.littlefatz.UnionFind;
+package com.littlefatz.unionfind;
 
 //https://leetcode-cn.com/problems/friend-circles/
 public class FriendCircles {

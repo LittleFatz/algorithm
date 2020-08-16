@@ -1,4 +1,4 @@
-package com.littlefatz.UnionFind;
+package com.littlefatz.unionfind;
 
 //https://leetcode-cn.com/problems/number-of-islands/
 public class NumbersOfIsland {
