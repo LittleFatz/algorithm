@@ -8,7 +8,7 @@ package com.littlefatz;
 
 public class ClimbingStairs {
 
-    public int climbStairs(int n) {
+    public int climbStairs2(int n) {
         if (n <= 2) {
             return n;
         }
@@ -24,4 +24,50 @@ public class ClimbingStairs {
 
         return f3;
     }
+
+
+    public int climbStairs(int n) {
+
+        if (n <= 2) {
+            return n;
+        }
+
+        int step1 = 1;
+        int step2 = 2;
+        int target = 3;
+        int result = 0;
+        while (target <= n) {
+            result = step1 + step2;
+            step1 = step2;
+            step2 = result;
+            target++;
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        ClimbingStairs test = new ClimbingStairs();
+        int result = test.climbStairs(3);
+        System.out.println(result);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
