@@ -1,4 +1,4 @@
-package com.littlefatz;
+package com.littlefatz.backtrack;
 
 import java.util.*;
 

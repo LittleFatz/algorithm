@@ -9,7 +9,7 @@ public class WordLadder {
 
     //广度优先搜索
     //先把每个单词的所有可能变化储存到一个字典，每次遍历的时候都检查一下这个字典有没有匹配项，如果有，证明能够找到变化的单词
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+    public int ladderLength3(String beginWord, String endWord, List<String> wordList) {
 
         int length = beginWord.length();
         Map<String, List<String>> allComboDict = new HashMap<>();
@@ -124,10 +124,79 @@ public class WordLadder {
         return 0;
     }
 
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+
+        Set<String> dict = new HashSet<>(wordList);
+        if (dict.size() == 0 || !dict.contains(endWord)) {
+            return 0;
+        }
+
+        Set<String> beginVisited = new HashSet<>();
+        Set<String> endVisited = new HashSet<>();
+
+        //避免多层次遍历后，新搜索的单词其实在更早的层次就已经被遍历过
+        Set<String> visited = new HashSet<>();
+
+
+        int step = 1;
+        beginVisited.add(beginWord);
+        endVisited.add(endWord);
+        int wordLength = beginWord.length();
+
+        while (!beginVisited.isEmpty() && !endVisited.isEmpty()) {
+
+            if (beginVisited.size() > endVisited.size()) {
+                Set<String> temp = beginVisited;
+                beginVisited = endVisited;
+                endVisited = temp;
+            }
+
+            Set<String> nextLevelVisit = new HashSet<>();
+            for (String word : beginVisited) {
+                char[] wordChars = word.toCharArray();
+                for (int i = 0; i < wordLength; i++) {
+                    char oldChar = wordChars[i];
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        if (c == oldChar) {
+                            continue;
+                        }
+                        wordChars[i] = c;
+                        String newWord = new String(wordChars);
+
+                        if (dict.contains(newWord)) {
+                            if (endVisited.contains(newWord)) {
+                                return step + 1;
+                            }
+
+                            if (!visited.contains(newWord)) {
+                                visited.add(newWord);
+                                nextLevelVisit.add(newWord);
+                            }
+                        }
+
+
+                    }
+                    wordChars[i] = oldChar;
+
+
+                }
+            }
+            beginVisited = nextLevelVisit;
+            step++;
+
+        }
+
+        return 0;
+
+    }
+
+
+
+
     public static void main(String[] args) {
         WordLadder test = new WordLadder();
         List<String> words = new ArrayList<>(Arrays.asList("hot","dot","dog","lot","log","cog"));
-        int length = test.ladderLength2("hit", "cog", words);
+        int length = test.ladderLength("hit", "cog", words);
         System.out.println(length);
     }
 
