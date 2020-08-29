@@ -11,6 +11,8 @@ public class SlidingPuzzle {
 
 
         Map<Integer, List<Integer>> move = new HashMap<>();
+
+        //定义每个index能够移动的位置
         move.put(0, new ArrayList<Integer>(Arrays.asList(1, 3)));
         move.put(1, new ArrayList<Integer>(Arrays.asList(0, 2, 4)));
         move.put(2, new ArrayList<Integer>(Arrays.asList(1, 5)));
