@@ -40,6 +40,7 @@ public class HouseRobber {
         }
 
         /**
+         * https://leetcode-cn.com/problems/house-robber/solution/da-jia-jie-she-dong-tai-gui-hua-jie-gou-hua-si-lu-/
          * 用 dp[i] 表示前 ii 间房屋能偷窃到的最高总金额
          * dp[i] = Math.max(dp[i-1], dp[i-2] + nums[i]);
          * 其实 i-1 未必被偷，dp[i-1]包含了两种情况：
