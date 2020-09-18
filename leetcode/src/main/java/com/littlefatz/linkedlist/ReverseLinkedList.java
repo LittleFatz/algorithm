@@ -16,32 +16,46 @@ import com.littlefatz.ListNode;
 
 
 public class ReverseLinkedList {
+//    public ListNode reverseList(ListNode head) {
+//        ListNode previous = null;
+//        ListNode current = head;
+//        while (current != null) {
+//            ListNode next = current.next;
+//            current.next = previous;
+//            previous = current;
+//            current = next;
+//
+//        }
+//
+//        return previous;
+//
+//    }
+//
+//
+//    public ListNode reverseList2(ListNode head) {
+//        if (head == null || head.next == null) {
+//            return head;
+//        }
+//
+//        ListNode current = reverseList2(head.next);
+//        head.next.next = head;
+//        head.next = null;
+//        return current;
+//
+//    }
+
     public ListNode reverseList(ListNode head) {
-        ListNode previous = null;
+        ListNode pre = null;
         ListNode current = head;
+
         while (current != null) {
-            ListNode next = current.next;
-            current.next = previous;
-            previous = current;
-            current = next;
-
+            ListNode temp = current.next;
+            current.next = pre;
+            pre = current;
+            current = temp;
         }
 
-        return previous;
-
-    }
-
-
-    public ListNode reverseList2(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-
-        ListNode current = reverseList2(head.next);
-        head.next.next = head;
-        head.next = null;
-        return current;
-
+        return pre;
     }
 
 }
