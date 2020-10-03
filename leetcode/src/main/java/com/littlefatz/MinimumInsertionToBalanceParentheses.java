@@ -4,7 +4,7 @@ package com.littlefatz;
 public class MinimumInsertionToBalanceParentheses {
 
     //https://mp.weixin.qq.com/s/plxWQsTgW6LW3T7yBAXjQg
-    public int minInsertions(String s) {
+    public int minInsertions2(String s) {
 
         int length = s.length();
         if (length == 0) {
@@ -46,6 +46,35 @@ public class MinimumInsertionToBalanceParentheses {
         MinimumInsertionToBalanceParentheses test = new MinimumInsertionToBalanceParentheses();
         System.out.println(test.minInsertions(data));
 
+    }
+
+
+    public int minInsertions(String s) {
+
+        int result = 0;
+        int rightNeed = 0;
+        char[] chars = s.toCharArray();
+
+        for (int i = 0; i < chars.length; i++) {
+
+            if (chars[i] == '(') {
+                rightNeed = rightNeed + 2;
+                if (rightNeed % 2 == 1) {
+                    result++;
+                    rightNeed--;
+                }
+            } else {
+                rightNeed--;
+                if (rightNeed == -1) {
+                    result++;
+                    rightNeed = 1;
+                }
+
+            }
+
+        }
+
+        return result + rightNeed;
 
     }
 }
