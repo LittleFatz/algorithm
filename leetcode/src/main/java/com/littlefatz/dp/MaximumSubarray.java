@@ -4,7 +4,7 @@ package com.littlefatz.dp;
 public class MaximumSubarray {
 
     //dp[i]表示包含nums[i]在内的最大子序列和
-    public int maxSubArray(int[] nums) {
+    public int maxSubArray3(int[] nums) {
 
         int length = nums.length;
         int[] dp = new int[length];
@@ -48,5 +48,28 @@ public class MaximumSubarray {
         System.out.println(test.maxSubArray(data));
 
 
+    }
+
+    public int maxSubArray(int[] nums) {
+
+        int length = nums.length;
+        if (length == 0) {
+            return 0;
+        }
+
+        int[] dp = new int[length];
+        dp[0] = nums[0];
+        int max = dp[0];
+        for (int i = 1; i < length; i++) {
+            int total = dp[i-1] + nums[i];
+            if (total > nums[i]) {
+                dp[i] = total;
+            } else {
+                dp[i] = nums[i];
+            }
+            max = Math.max(max, dp[i]);
+        }
+
+        return max;
     }
 }
