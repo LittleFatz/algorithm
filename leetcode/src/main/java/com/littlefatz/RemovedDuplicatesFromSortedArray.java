@@ -6,7 +6,7 @@ package com.littlefatz;
 public class RemovedDuplicatesFromSortedArray {
 
 
-    public int removeDuplicates(int[] nums) {
+    public int removeDuplicates3(int[] nums) {
 
         int result = nums.length;
         if (nums.length <= 1) {
@@ -54,11 +54,28 @@ public class RemovedDuplicatesFromSortedArray {
     public static void main(String[] args) {
         int[] data = new int[]{1,1,2};
         RemovedDuplicatesFromSortedArray test = new RemovedDuplicatesFromSortedArray();
-        int result = test.removeDuplicates2(data);
+        int result = test.removeDuplicates(data);
         System.out.println(result);
-        for (int i : data) {
-            System.out.println(i);
+//        for (int i : data) {
+//            System.out.println(i);
+//        }
+        System.out.println(data.toString());
+
+    }
+
+    public int removeDuplicates(int[] nums) {
+        int length = nums.length;
+
+        int slow = 0;
+        int fast = 0;
+        while (fast < length) {
+            if (nums[fast] != nums[slow]) {
+                slow++;
+                nums[slow] = nums[fast];
+            }
+            fast++;
         }
 
+        return slow+1;
     }
 }
