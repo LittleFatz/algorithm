@@ -75,6 +75,7 @@ public class KthLargestElement {
 
     }
 
+    //其实这里就是快排思想
     private int partition(int[] nums, int left, int right) {
         if (left < right) {
             int randomIndex = left + 1 + random.nextInt(right - left);
