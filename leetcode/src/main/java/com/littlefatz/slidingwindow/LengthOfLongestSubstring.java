@@ -1,4 +1,4 @@
-package com.littlefatz;
+package com.littlefatz.slidingwindow;
 
 import java.util.*;
 
