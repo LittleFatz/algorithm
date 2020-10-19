@@ -65,7 +65,7 @@ public class SplitArrayLargestSum {
         System.out.println(test.splitArray(data,2));
     }
 
-    public int splitArray(int[] nums, int m) {
+    public int splitArray3(int[] nums, int m) {
 
         int length = nums.length;
         int[][] dp = new int[length+1][m+1];
@@ -90,4 +90,61 @@ public class SplitArrayLargestSum {
         return dp[length][m];
 
     }
+
+    //二分查找
+    public int splitArray(int[] nums, int m) {
+        int left = getMax(nums);
+        int right = getSum(nums);
+
+        while (left <= right) {
+            int middle = left + (right - left) / 2;
+            int count = getGroupCount(nums, middle);
+            if (count == m) {
+                right = middle - 1;
+            } else if (count > m) {
+                left = middle + 1;
+            } else if (count < m) {
+                right = middle - 1;
+            }
+        }
+
+        return left;
+
+    }
+
+    private int getGroupCount(int[] nums, int max) {
+
+        int sum = 0;
+        int count = 1;
+        for (int num : nums) {
+            if (sum + num <= max) {
+                sum += num;
+            } else {
+                count++;
+                sum = num;
+            }
+        }
+        return count;
+
+    }
+
+    private int getMax(int[] nums) {
+        int max = Integer.MIN_VALUE;
+        for (int num : nums) {
+            max = Math.max(max, num);
+        }
+        return max;
+    }
+
+    private int getSum(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        return sum;
+    }
+
+
+
+
 }
