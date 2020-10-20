@@ -26,7 +26,7 @@ public class SuperEggDrop {
 
         int low = 1;
         int high = N;
-        int result = Integer.MAX_VALUE;
+        int result = N;
 
         /**
          *
@@ -43,8 +43,16 @@ public class SuperEggDrop {
 
             //result = min(max(碎，没碎) + 1)
             if (broken == notBroken) {
-                low = middle + 1;
-                result = Math.min(result, notBroken + 1);
+                //这里把 == 这种情况归入 > 或者 < 的 if 中都是正确的
+//                low = middle + 1;
+//                result = Math.min(result, notBroken + 1);
+//                high = middle - 1;
+//                result = Math.min(result, broken + 1);
+
+                //直接跳出的话，速度更快
+                result = Math.min(result, broken + 1);
+                break;
+
             } else if (broken < notBroken) {
                 //如果 broken < notBroken，那么证明交点在 middle 的右边，需要往右边逼近
                 //因为我们要求的是 broken 和 notBroken 中的最大值，所以这里把result 更新为 notBroken + 1
