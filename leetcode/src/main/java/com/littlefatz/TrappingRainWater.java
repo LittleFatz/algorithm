@@ -7,7 +7,7 @@ import java.util.Stack;
 public class TrappingRainWater {
 
     //单调栈，从底到顶递减
-    public int trap(int[] height) {
+    public int trap3(int[] height) {
         Stack<Integer> stack = new Stack<>();
         int rain = 0;
         for (int i = 0; i < height.length; i++) {
@@ -65,5 +65,40 @@ public class TrappingRainWater {
         TrappingRainWater test = new TrappingRainWater();
         int rain = test.trap2(data);
         System.out.println(rain);
+    }
+
+
+    public int trap(int[] height) {
+        if (height.length == 0) {
+            return 0;
+        }
+
+        int left = 0;
+        int right = height.length - 1;
+        int leftMax = height[0];
+        int rightMax = height[height.length - 1];
+        int result = 0;
+
+        while (left < right) {
+            leftMax = Math.max(leftMax, height[left]);
+            rightMax = Math.max(rightMax, height[right]);
+
+            /**
+             * 如果 leftMax <= rightMax，则去计算左边能够接到的雨水
+             * 因为 leftMax 已经比当前的 rightMax 小，即使右边出现更高的 rightMax 也不会影响
+             * 因为 leftMax 已经比当前的 rightMax 大，那么就去计算右边接到的雨水，如果使用当前 rightMax 计算左边雨水的话，无法保证右边不会出现更小的 rightMax
+             */
+            if (leftMax <= rightMax) {
+                result += leftMax - height[left];
+                left++;
+            } else {
+                result += rightMax - height[right];
+                right--;
+            }
+
+
+        }
+
+        return result;
     }
 }
