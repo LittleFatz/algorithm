@@ -10,7 +10,7 @@ https://leetcode-cn.com/problems/move-zeroes/
 
 
 public class MoveZero {
-    public void moveZeroes(int[] nums) {
+    public void moveZeroes2(int[] nums) {
         int j = 0;
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != 0) {
@@ -30,5 +30,27 @@ public class MoveZero {
         for (int i = 0; i < a.length; i++) {
             System.out.println(a[i]);
         }
+    }
+
+    public void moveZeroes(int[] nums) {
+
+        int length = nums.length;
+        if (length == 0) {
+             return;
+        }
+
+        int slow = 0;
+        int fast = 0;
+        while (fast < length) {
+            if (nums[fast] != 0) {
+                nums[slow++] = nums[fast];
+            }
+            fast++;
+        }
+
+        for (int k = slow; k < length; k++) {
+            nums[k] = 0;
+        }
+
     }
 }
