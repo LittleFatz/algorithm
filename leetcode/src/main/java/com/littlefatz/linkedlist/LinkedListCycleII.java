@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 
 public class LinkedListCycleII {
 
-    public ListNode detectCycle(ListNode head) {
+    public ListNode detectCycle3(ListNode head) {
         Set<ListNode> index = new HashSet<>();
         ListNode current = head;
         while (current != null && current.next != null) {
@@ -69,6 +69,40 @@ public class LinkedListCycleII {
         LinkedListCycleII test = new LinkedListCycleII();
         head = test.detectCycle(head);
         System.out.println(head.val);
+
+
+    }
+
+    public ListNode detectCycle(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head;
+        boolean meet = false;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (fast == slow) {
+                meet = true;
+                break;
+            }
+        }
+
+        if (meet) {
+            slow = head;
+            while (slow != fast) {
+                slow = slow.next;
+                fast = fast.next;
+            }
+//            if (slow == fast) {
+//                return slow;
+//            }
+            return slow;
+        }
+        return null;
 
 
     }
