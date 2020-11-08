@@ -50,18 +50,18 @@ public class CoinChange {
 
     public static void main(String[] args) {
         CoinChange test = new CoinChange();
-        int[] coins = new int[]{2,5,10,1};
+        int[] coins = new int[]{1,2,5};
 
 
-        System.out.println(test.coinChange(coins,27));
+        System.out.println(test.coinChange(coins,11));
     }
 
-    public int coinChange(int[] coins, int amount) {
+    public int coinChange2(int[] coins, int amount) {
 
         int length = coins.length;
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, amount+1);
-        dp[0] = 0;
+        dp[0] = 0;//注意这个base base 不能漏
         for (int i = 1; i <= amount; i++) {
             for (int j = 0; j < length; j++) {
                 if (coins[j] <= i) {
@@ -72,4 +72,34 @@ public class CoinChange {
 
         return (dp[amount] == amount + 1) ? -1 : dp[amount];
     }
+
+
+    public int coinChange(int[] coins, int amount) {
+        if (amount == 0) {
+            return 0;
+        }
+
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+                }
+            }
+        }
+
+        return (dp[amount] == amount + 1) ? -1 : dp[amount];
+    }
+
+
+
+
+
+
+
+
+
+
 }
