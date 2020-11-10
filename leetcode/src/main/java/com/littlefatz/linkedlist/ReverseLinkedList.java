@@ -12,9 +12,6 @@ import com.littlefatz.ListNode;
  * }
  */
 //https://leetcode-cn.com/problems/reverse-linked-list/
-
-
-
 public class ReverseLinkedList {
 //    public ListNode reverseList(ListNode head) {
 //        ListNode previous = null;
@@ -44,7 +41,7 @@ public class ReverseLinkedList {
 //
 //    }
 
-    public ListNode reverseList(ListNode head) {
+    public ListNode reverseList2(ListNode head) {
         ListNode pre = null;
         ListNode current = head;
 
@@ -57,6 +54,40 @@ public class ReverseLinkedList {
 
         return pre;
     }
+
+
+    public ListNode reverseList(ListNode head) {
+
+        ListNode pre = null;
+        ListNode current = head;
+
+        while (current != null) {
+            ListNode temp = current.next;
+            current.next = pre;
+            pre = current;
+            current = temp;
+        }
+
+        return pre;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
