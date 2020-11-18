@@ -55,51 +55,85 @@ public class KthLargestElement {
 //        nums[index2] = temp;
 //    }
 
-    public int findKthLargest(int[] nums, int k) {
-        int length = nums.length;
-        int target = length - k;
-        int left = 0;
-        int right = length - 1;
-
-        while (true) {
-            int index = partition(nums, left, right);
-            if (index == target) {
-                return nums[index];
-            } else if (index < target) {
-                left = index + 1;
-            } else {
-                right = index - 1;
-            }
-        }
-
-
-    }
-
-    //其实这里就是快排思想
-    private int partition(int[] nums, int left, int right) {
-        if (left < right) {
-            int randomIndex = left + 1 + random.nextInt(right - left);
-            swap(nums, left, randomIndex);
-        }
-
-        int pivot = nums[left];
-        int j = left;
-        for (int i = left+1; i <= right; i++) {
-            if (nums[i] < pivot) {
-                j++;
-                swap(nums, i, j);
-            }
-        }
-
-        swap(nums, left, j);
-        return j;
-
-    }
-
+//    public int findKthLargest(int[] nums, int k) {
+//        int length = nums.length;
+//        int target = length - k;
+//        int left = 0;
+//        int right = length - 1;
+//
+//        while (true) {
+//            int index = partition(nums, left, right);
+//            if (index == target) {
+//                return nums[index];
+//            } else if (index < target) {
+//                left = index + 1;
+//            } else {
+//                right = index - 1;
+//            }
+//        }
+//
+//
+//    }
+//
+//    //其实这里就是快排思想
+//    private int partition(int[] nums, int left, int right) {
+//        if (left < right) {
+//            int randomIndex = left + 1 + random.nextInt(right - left);
+//            swap(nums, left, randomIndex);
+//        }
+//
+//        int pivot = nums[left];
+//        int j = left;
+//        for (int i = left+1; i <= right; i++) {
+//            if (nums[i] < pivot) {
+//                j++;
+//                swap(nums, i, j);
+//            }
+//        }
+//
+//        swap(nums, left, j);
+//        return j;
+//
+//    }
+//
     private void swap(int[] nums, int index1, int index2) {
         int temp = nums[index1];
         nums[index1] = nums[index2];
         nums[index2] = temp;
+    }
+
+    public int findKthLargest(int[] nums, int k) {
+        int target = nums.length - k;
+        int start = 0;
+        int end = nums.length - 1;
+
+        while (true) {
+            int pivot = partition(nums, start, end);
+            if (pivot == target) {
+                return nums[target];
+            } else if (pivot < target) {
+                start = pivot + 1;
+            } else {
+                end = pivot - 1;
+            }
+        }
+
+    }
+
+    private int partition(int[] nums, int start, int end) {
+
+        int pivot = nums[start];
+        int counter = start;
+        for (int i = start + 1; i <= end; i++) {
+            if (nums[i] < pivot) {
+                counter++;
+                swap(nums, counter, i);
+            }
+        }
+
+        swap(nums, start, counter);
+        return counter;
+
     }
 
 }
