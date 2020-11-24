@@ -30,7 +30,7 @@ public class RemoveNthNodeFromEnd {
         return result.next;
     }
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
+    public ListNode removeNthFromEnd3(ListNode head, int n) {
         if (head == null) {
             return null;
         }
@@ -58,6 +58,42 @@ public class RemoveNthNodeFromEnd {
         slow.next = slow.next.next;
         return head;
     }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+
+        ListNode fast = head;
+        ListNode slow = head;
+        int step = n;
+
+        while (step > 0) {
+            fast = fast.next;
+            step--;
+        }
+
+        if (fast == null) {
+            return head.next;
+        }
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+        return head;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
