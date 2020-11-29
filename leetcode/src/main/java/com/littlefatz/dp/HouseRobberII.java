@@ -35,7 +35,7 @@ public class HouseRobberII {
 //
 //    }
 
-    public int rob(int[] nums) {
+    public int rob2(int[] nums) {
 
         int length = nums.length;
         if (length == 0) {
@@ -52,7 +52,7 @@ public class HouseRobberII {
 
     }
 
-    private int myRob(int[] nums, int start, int end) {
+    private int myRob2(int[] nums, int start, int end) {
 
         int length = nums.length;
         int[] dp = new int[length];
@@ -66,4 +66,40 @@ public class HouseRobberII {
         return dp[end];
 
     }
+
+
+
+
+
+
+
+
+    public int rob(int[] nums) {
+        int length = nums.length;
+        if (length == 0) {
+            return 0;
+        } else if (length == 1) {
+            return nums[0];
+        }
+
+        if (length == 2) {
+            return Math.max(nums[0], nums[1]);
+        }
+
+        return Math.max(myRob(nums, 0, length - 2), myRob(nums, 1, length - 1));
+    }
+
+    private int myRob(int[] nums, int start, int end) {
+        int length = nums.length;
+        int[] dp = new int[length];
+        dp[start] = nums[start];
+        dp[start + 1] = Math.max(nums[start], nums[start + 1]);
+        for (int i = start + 2; i <= end; i++) {
+            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);
+        }
+
+        return dp[end];
+    }
+
+
 }
