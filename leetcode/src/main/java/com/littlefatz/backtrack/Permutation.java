@@ -1,55 +1,46 @@
 package com.littlefatz.backtrack;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
+//https://leetcode-cn.com/problems/permutations/
 public class Permutation {
 
-    private char[] chars;
-    private List<String> result = new ArrayList<>();
-    private int length = 0;
+    private List<List<Integer>> result = new ArrayList<>();
 
-    public String[] permutation(String s) {
-        if (s == null) {
-            return null;
+    public List<List<Integer>> permute(int[] nums) {
+        int length = nums.length;
+        if (length == 0) {
+            return result;
         }
 
-        chars = s.toCharArray();
-        length = s.length();
-        backtrack(0);
-
-
-        return result.toArray(new String[length]);
+        boolean[] visited = new boolean[length];
+        Deque<Integer> path = new LinkedList<>();
+        dfs(nums, length, visited, path);
+        return result;
 
 
     }
 
-    private void backtrack(int position) {
-        if (position == length - 1) {
-            result.add(new String(chars));
+    private void dfs(int[] nums, int length, boolean[] visited, Deque<Integer> path) {
+        if (path.size() == length) {
+            result.add(new ArrayList<>(path));
             return;
         }
 
+        for (int i = 0; i < length; i++) {
+            if (!visited[i]) {
+                path.addLast(nums[i]);
+                visited[i] = true;
 
-        Set<Character> set = new HashSet<>();
-        for (int i = position; i < length; i++) {
-            if (set.contains(chars[i])) {
-                continue;
+                dfs(nums, length, visited, path);
+
+                visited[i] = false;
+                path.removeLast();
             }
-            set.add(chars[i]);
-            swap(position, i);
-            backtrack(position + 1);
-            swap(position, i);
         }
 
     }
-
-    private void swap(int a, int b) {
-        char temp = chars[a];
-        chars[a] = chars[b];
-        chars[b] = temp;
-    }
-
 }
