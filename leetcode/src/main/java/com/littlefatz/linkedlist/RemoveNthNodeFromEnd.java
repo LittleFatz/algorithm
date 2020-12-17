@@ -4,7 +4,7 @@ import com.littlefatz.ListNode;
 
 import java.util.List;
 
-//https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
+//https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
 public class RemoveNthNodeFromEnd {
 
     public ListNode removeNthFromEnd2(ListNode head, int n) {
@@ -59,12 +59,39 @@ public class RemoveNthNodeFromEnd {
         return head;
     }
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
+    public ListNode removeNthFromEnd4(ListNode head, int n) {
 
         ListNode fast = head;
         ListNode slow = head;
         int step = n;
 
+        while (step > 0) {
+            fast = fast.next;
+            step--;
+        }
+
+        if (fast == null) {
+            return head.next;
+        }
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+        return head;
+
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (head == null) {
+            return null;
+        }
+
+        ListNode fast = head;
+        ListNode slow = head;
+        int step = n;
         while (step > 0) {
             fast = fast.next;
             step--;
