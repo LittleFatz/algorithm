@@ -56,7 +56,7 @@ public class ReverseLinkedList {
     }
 
 
-    public ListNode reverseList(ListNode head) {
+    public ListNode reverseList3(ListNode head) {
 
         ListNode pre = null;
         ListNode current = head;
@@ -72,7 +72,23 @@ public class ReverseLinkedList {
     }
 
 
+    public ListNode reverseList(ListNode head) {
+        if (head == null) {
+            return head;
+        }
 
+        ListNode pre = null;
+        ListNode current = head;
+        ListNode next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = pre;
+            pre = current;
+            current = next;
+        }
+
+        return pre;
+    }
 
 
 
