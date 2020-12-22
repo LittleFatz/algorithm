@@ -1,5 +1,6 @@
 package com.littlefatz.sort;
 
+//https://leetcode-cn.com/problems/sort-an-array/
 public class QuickSort {
 
 //    public int[] sortArray(int[] nums) {
@@ -83,7 +84,42 @@ public class QuickSort {
         nums[j] = temp;
     }
 
+//    public int[] sortArray(int[] nums) {
+//        quickSort(nums, 0, nums.length - 1);
+//        return nums;
+//    }
+//
+//    private void quickSort(int[] nums, int start, int end) {
+//        if (start >= end) {
+//            return;
+//        }
+//
+//        int pivot = partition(nums, start, end);
+//        quickSort(nums, start, pivot - 1);
+//        quickSort(nums, pivot + 1, end);
+//    }
+//
+//    private int partition(int[] nums, int start, int end) {
+//        int pivot = nums[start];
+//        int counter = start;
+//        for (int i = start + 1; i <= end; i++) {
+//            //nums[i] < pivot 才会推进counter的移动
+//            if (nums[i] < pivot) {
+//                //这里需要先 counter++， 因为counter初始值是start，第一次是先交换 counter+1 的位置
+//                counter++;
+//                swap(nums, i, counter);
+//            }
+//        }
+//        //最后才把 pivot 和 counter 位置互换
+//        swap(nums, counter, start);
+//        return counter;
+//    }
+
     public int[] sortArray(int[] nums) {
+        if (nums.length == 0) {
+            return nums;
+        }
+
         quickSort(nums, 0, nums.length - 1);
         return nums;
     }
@@ -92,25 +128,29 @@ public class QuickSort {
         if (start >= end) {
             return;
         }
-        
+
         int pivot = partition(nums, start, end);
         quickSort(nums, start, pivot - 1);
         quickSort(nums, pivot + 1, end);
+
     }
 
     private int partition(int[] nums, int start, int end) {
+
         int pivot = nums[start];
         int counter = start;
         for (int i = start + 1; i <= end; i++) {
-            //nums[i] < pivot 才会推进counter的移动
             if (nums[i] < pivot) {
-                //这里需要先 counter++， 因为counter初始值是start，第一次是先交换 counter+1 的位置
                 counter++;
-                swap(nums, i, counter);
+                swap(nums, counter, i);
             }
         }
-        //最后才把 pivot 和 counter 位置互换
-        swap(nums, counter, start);
+        swap(nums, start, counter);
         return counter;
+
+
+
     }
+
+
 }
