@@ -47,31 +47,85 @@ public class LongestPalindromicSubstring {
 
     public static void main(String[] args) {
         LongestPalindromicSubstring test = new LongestPalindromicSubstring();
-        System.out.println(test.longestPalindrome("cbbd"));
+        System.out.println(test.longestPalindrome("aacabdkacaa"));
     }
+
+//    public String longestPalindrome(String s) {
+//
+//        int length = s.length();
+//        String result = "";
+//        for (int i = 0; i < length; i++) {
+//            String s1 = palindrome(s, i, i);
+//            String s2 = palindrome(s, i, i + 1);
+//            String tempMax = s1.length() > s2.length() ? s1 : s2;
+//            result = result.length() > tempMax.length() ? result : tempMax;
+//        }
+//
+//        return result;
+//    }
+//
+//    private String palindrome(String s, int left, int right) {
+//        char[] chars = s.toCharArray();
+//        while (left >= 0 && right < chars.length && chars[left] == chars[right]) {
+//            left--;
+//            right++;
+//        }
+//
+//        return s.substring(left + 1, right);
+//    }
+
 
     public String longestPalindrome(String s) {
-
         int length = s.length();
-        String result = "";
+        if (length <= 1) {
+            return s;
+        }
+
+        boolean[][] dp = new boolean[length][length];
         for (int i = 0; i < length; i++) {
-            String s1 = palindrome(s, i, i);
-            String s2 = palindrome(s, i, i + 1);
-            String tempMax = s1.length() > s2.length() ? s1 : s2;
-            result = result.length() > tempMax.length() ? result : tempMax;
+            dp[i][i] = true;
         }
 
-        return result;
-    }
-
-    private String palindrome(String s, int left, int right) {
         char[] chars = s.toCharArray();
-        while (left >= 0 && right < chars.length && chars[left] == chars[right]) {
-            left--;
-            right++;
+        int maxLength = 1;
+        int startIndex = 0;
+
+        for (int i = length - 2; i >= 0; i--) {
+            for (int j = i + 1; j < length; j++) {
+                if (chars[i] != chars[j]) {
+                    dp[i][j] = false;
+                } else {
+                    /**
+                     *    1. 如果 i 到 j 的长度小于等于 3（只有 2 或者 3 个字符），那么这时候一定是回文串
+                     *    2. 否则的话，则需要参考 dp[i+1][j-1] 是不是回文串
+                     */
+                    if (j - i < 3) {
+                        dp[i][j] = true;
+                    } else {
+                        dp[i][j] = dp[i+1][j-1];
+                    }
+                }
+
+                if (dp[i][j] && (j - i + 1) > maxLength) {
+                    maxLength = j - i + 1;
+                    startIndex = i;
+                }
+            }
         }
 
-        return s.substring(left + 1, right);
+        System.out.println(startIndex);
+        System.out.println(maxLength);
+        return s.substring(startIndex, startIndex + maxLength);
+
+
     }
+
+
+
+
+
+
+
+
 
 }
