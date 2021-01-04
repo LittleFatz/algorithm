@@ -24,7 +24,7 @@ public class LengthOfLongestSubstring {
                 //start 则会被重新修改到更早的位置
                 /**
                  * 例如 abcdefghda 这个字符串
-                 * 遍历到第二个 d 的时候，start = 3（第一个 d 的index）
+                 * 遍历到第二个 d 的时候，start = 3（第一个 d 的index）, start 会被更新为 4
                  * 接下来遍历到 a，如果 start = map.get(array[i]) + 1 的话，则 start = 1，最后返回的结果错误
                  */
                 start = Math.max(start, map.get(array[i]) + 1);
@@ -41,7 +41,7 @@ public class LengthOfLongestSubstring {
         System.out.println(test.lengthOfLongestSubstring("abba"));
     }
 
-    public int lengthOfLongestSubstring(String s) {
+    public int lengthOfLongestSubstring3(String s) {
 
         int length = s.length();
         if (length == 0) {
@@ -66,4 +66,40 @@ public class LengthOfLongestSubstring {
 
         return max;
     }
+
+    public int lengthOfLongestSubstring(String s) {
+        int length = s.length();
+        if (length == 0) {
+            return 0;
+        }
+
+        char[] chars = s.toCharArray();
+        Map<Character, Integer> indexMap = new HashMap<>();
+        int startIndex = 0;
+        int max = 1;
+        for (int i = 0; i < length; i++) {
+            if (indexMap.containsKey(chars[i])) {
+                startIndex = Math.max(startIndex, indexMap.get(chars[i]) + 1);
+            }
+
+            indexMap.put(chars[i], i);
+            max = Math.max(max, i - startIndex + 1);
+
+        }
+
+        return max;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
