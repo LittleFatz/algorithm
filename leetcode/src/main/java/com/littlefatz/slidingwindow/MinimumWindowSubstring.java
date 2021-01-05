@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 //https://leetcode-cn.com/problems/minimum-window-substring/
+//https://labuladong.gitbook.io/algo/di-ling-zhang-bi-du-xi-lie/hua-dong-chuang-kou-ji-qiao-jin-jie
 public class MinimumWindowSubstring {
 
-    public String minWindow(String s, String t) {
+    public String minWindow2(String s, String t) {
 
         if (s == null || t == null) {
             return "";
@@ -79,6 +80,65 @@ public class MinimumWindowSubstring {
     public static void main(String[] args) {
         MinimumWindowSubstring test = new MinimumWindowSubstring();
         System.out.println(test.minWindow("aa", "aa"));
+    }
+
+    public String minWindow(String s, String t) {
+
+        int sLength = s.length();
+        int tLength = t.length();
+
+        if (sLength == 0 || tLength == 0) {
+            return "";
+        }
+
+        int left = 0;
+        int right = 0;
+        Map<Character, Integer> need = new HashMap<>();
+        Map<Character, Integer> window = new HashMap<>();
+
+        int valid = 0;
+        int minLength = Integer.MAX_VALUE;
+        int start = 0;
+
+        for (char c : t.toCharArray()) {
+            need.put(c, need.getOrDefault(c, 0) + 1);
+        }
+
+        char[] sChars = s.toCharArray();
+
+        while (right < sLength) {
+            char c = sChars[right];
+            right++;
+
+            if (need.containsKey(c)) {
+                window.put(c, window.getOrDefault(c, 0) + 1);
+                if (window.get(c).equals(need.get(c))) {
+                    valid++;
+                }
+            }
+
+            while (valid == need.size()) {
+                if (right - left < minLength) {
+                    minLength = right - left;
+                    start = left;
+                }
+
+                char leftChar = sChars[left];
+                left++;
+
+                if (need.containsKey(leftChar)) {
+                    if (window.get(leftChar).equals(need.get(leftChar))) {
+                        valid--;
+                    }
+                    window.put(leftChar, window.get(leftChar) - 1);
+                }
+
+            }
+        }
+
+        return minLength == Integer.MAX_VALUE ? "" : s.substring(start, start + minLength);
+
+
     }
 
 }
