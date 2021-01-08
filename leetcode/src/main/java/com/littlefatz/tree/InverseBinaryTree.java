@@ -1,10 +1,9 @@
 package com.littlefatz.tree;
 
 
+import sun.reflect.generics.tree.Tree;
+
 //https://leetcode-cn.com/problems/invert-binary-tree/
-
-import com.littlefatz.tree.TreeNode;
-
 public class InverseBinaryTree {
 
     //递归交换左右节点的指针
@@ -25,23 +24,7 @@ public class InverseBinaryTree {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public TreeNode invertTree(TreeNode root) {
+    public TreeNode invertTree3(TreeNode root) {
         if (root == null) {
             return null;
         }
@@ -54,4 +37,31 @@ public class InverseBinaryTree {
 
         return root;
     }
+
+
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+
+        TreeNode leftNode = root.left;
+        TreeNode rightNode = root.right;
+        root.left = rightNode;
+        root.right = leftNode;
+
+        invertTree(leftNode);
+        invertTree(rightNode);
+
+        return root;
+    }
+
+
+
+
+
+
+
+
+
+
 }
