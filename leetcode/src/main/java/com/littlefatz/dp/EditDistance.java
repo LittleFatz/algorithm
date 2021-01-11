@@ -140,7 +140,7 @@ public class EditDistance {
 
     }
 
-    public int minDistance(String word1, String word2) {
+    public int minDistance4(String word1, String word2) {
 
         int length1 = word1.length();
         int length2 = word2.length();
@@ -176,7 +176,56 @@ public class EditDistance {
         }
 
         return dp[length1][length2];
-
-
     }
+
+    public int minDistance(String word1, String word2) {
+
+        int length1 = word1.length();
+        int length2 = word2.length();
+
+        if (length1 == 0) {
+            return length2;
+        }
+
+        if (length2 == 0) {
+            return length1;
+        }
+
+        int[][] dp = new int[length1 + 1][length2 + 1];
+        for (int k = 0; k <= length1; k++) {
+            dp[k][0] = k;
+        }
+
+        for (int k = 0; k <= length2; k++) {
+            dp[0][k] = k;
+        }
+
+        char[] chars1 = word1.toCharArray();
+        char[] chars2 = word2.toCharArray();
+
+        for (int i = 1; i <= length1; i++) {
+            for (int j = 1; j <= length2; j++) {
+                if (chars1[i-1] == chars2[j-1]) {
+                    dp[i][j] = dp[i-1][j-1];
+                } else {
+                    dp[i][j] = Math.min(Math.min(dp[i][j-1], dp[i-1][j-1]), dp[i-1][j]) + 1;
+                }
+            }
+        }
+
+
+
+        return dp[length1][length2];
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
