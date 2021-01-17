@@ -2,6 +2,7 @@ package com.littlefatz;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.LinkedList;
 
 //https://leetcode-cn.com/problems/sliding-window-maximum/
 //单调双向队列
@@ -35,7 +36,7 @@ public class SlidingWindowMaximum {
     }
 
     public static void main(String[] args) {
-        int[] data = new int[]{1,3,1,2,0,5};
+        int[] data = new int[]{1,3,-1,-3,5,3,6,7};
         SlidingWindowMaximum test = new SlidingWindowMaximum();
         int[] result = test.maxSlidingWindow(data, 3);
         for (int i : result) {
@@ -44,7 +45,7 @@ public class SlidingWindowMaximum {
 
     }
 
-    public int[] maxSlidingWindow(int[] nums, int k) {
+    public int[] maxSlidingWindow3(int[] nums, int k) {
 
         int length = nums.length;
         int[] result = new int[length - k + 1];
@@ -72,4 +73,41 @@ public class SlidingWindowMaximum {
 
         return result;
     }
+
+    public int[] maxSlidingWindow(int[] nums, int k) {
+
+        int length = nums.length;
+        int[] result = new int[length - k + 1];
+        int resultIndex = 0;
+        Deque<Integer> deque = new ArrayDeque<>();
+
+        for (int i = 0; i < length; i++) {
+
+            while (!deque.isEmpty() && deque.peekFirst() < (i - k + 1)) {
+                deque.removeFirst();
+            }
+
+            while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
+                deque.removeLast();
+            }
+
+            deque.addLast(i);
+
+            if ((i - k + 1) >= 0) {
+                result[resultIndex++] = nums[deque.peekFirst()];
+            }
+
+        }
+
+        return result;
+    }
+
+
+
+
+
+
+
+
+
 }
