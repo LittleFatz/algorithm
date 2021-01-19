@@ -41,7 +41,7 @@ public class ValidParenthese {
         System.out.println(flag);
     }
 
-    public boolean isValid(String s) {
+    public boolean isValid2(String s) {
 
         if (s == null || s.isEmpty()) {
             return false;
@@ -84,6 +84,53 @@ public class ValidParenthese {
             return '{';
         }
     }
+
+    public boolean isValid(String s) {
+
+        int length = s.length();
+        char[] chars = s.toCharArray();
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < length; i++) {
+            if (isLeft(chars[i])) {
+                stack.push(chars[i]);
+            } else {
+                if (stack.isEmpty() || !match(stack.pop(), chars[i])) {
+                    return false;
+                }
+            }
+        }
+
+        if (stack.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isLeft(char c) {
+        return c == '(' || c == '[' || c == '{';
+    }
+
+    private boolean match(char left, char right) {
+        if (left == '(') {
+            return right == ')';
+        } else if (left == '[') {
+            return right == ']';
+        } else {
+            return right == '}';
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 //回溯法，原理类似于深度优先遍历树，每次遍历到叶子节点后，需要回退到上一个状态
 public class Permutations {
 
-//    private List<List<Integer>> results = new ArrayList<>();
+    private List<List<Integer>> results = new ArrayList<>();
 //    private int size = 0;
 //    private boolean[] used;
 
