@@ -85,7 +85,9 @@ public class FindFirstAndLastPostionOfElement {
     }
 
 
-    private int findLeftBound(int[] nums, int target) {
+
+
+    private int findLeftBound3(int[] nums, int target) {
 
         int left = 0;
         int right = nums.length - 1;
@@ -109,7 +111,7 @@ public class FindFirstAndLastPostionOfElement {
     }
 
 
-    private int findRightBound(int[] nums, int target) {
+    private int findRightBound3(int[] nums, int target) {
 
         int left = 0;
         int right = nums.length - 1;
@@ -132,6 +134,63 @@ public class FindFirstAndLastPostionOfElement {
         return right;
 
     }
+
+
+
+    private int findRightBound(int[] nums, int target) {
+
+        int length = nums.length;
+        int left = 0;
+        int right = length - 1;
+
+        while (left <= right) {
+
+            int middle = left + (right - left) / 2;
+            if (target == nums[middle]) {
+                left = middle + 1;
+            } else if (target < nums[middle]) {
+                right = middle - 1;
+            } else if (target > nums[middle]) {
+                left = middle + 1;
+            }
+        }
+
+        if (right < 0 || nums[right] != target) {
+            return -1;
+        }
+
+        return right;
+    }
+
+    private int findLeftBound(int[] nums, int target) {
+        int length = nums.length;
+        int left = 0;
+        int right = length - 1;
+
+        while (left <= right) {
+
+            int middle = left + (right - left) / 2;
+            if (target == nums[middle]) {
+                right = middle - 1;
+            } else if (target < nums[middle]) {
+                right = middle - 1;
+            } else if (target > nums[middle]) {
+                left = middle + 1;
+            }
+        }
+
+        if (left >= length || nums[left] != target) {
+            return -1;
+        }
+
+        return left;
+    }
+
+
+
+
+
+
 
 
 

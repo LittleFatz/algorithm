@@ -102,38 +102,80 @@ public class KthLargestElement {
         nums[index2] = temp;
     }
 
+//    public int findKthLargest(int[] nums, int k) {
+//        int target = nums.length - k;
+//        int start = 0;
+//        int end = nums.length - 1;
+//
+//        while (true) {
+//            int pivot = partition(nums, start, end);
+//            if (pivot == target) {
+//                return nums[target];
+//            } else if (pivot < target) {
+//                start = pivot + 1;
+//            } else {
+//                end = pivot - 1;
+//            }
+//        }
+//
+//    }
+//
+//    private int partition(int[] nums, int start, int end) {
+//
+//        int pivot = nums[start];
+//        int counter = start;
+//        for (int i = start + 1; i <= end; i++) {
+//            if (nums[i] < pivot) {
+//                counter++;
+//                swap(nums, counter, i);
+//            }
+//        }
+//
+//        swap(nums, start, counter);
+//        return counter;
+//
+//    }
+
+
+    /**
+     * 总体思想是快速排序，只不过不是对整个数组进行快速排序
+     * 每次快速排序后，先确定 pivot 是否和 target 一致，如果一致则返回
+     * 不一致的话就继续缩小空间
+     */
     public int findKthLargest(int[] nums, int k) {
-        int target = nums.length - k;
-        int start = 0;
-        int end = nums.length - 1;
+
+        int length = nums.length;
+        int target = length - k;
+        int left = 0;
+        int right = length - 1;
 
         while (true) {
-            int pivot = partition(nums, start, end);
-            if (pivot == target) {
-                return nums[target];
-            } else if (pivot < target) {
-                start = pivot + 1;
+            int index = partition(nums, left, right);
+            if (index == target) {
+                return nums[index];
+            } else if (index < target) {
+                left = index + 1;
             } else {
-                end = pivot - 1;
+                right = index - 1;
             }
         }
+
+
 
     }
 
-    private int partition(int[] nums, int start, int end) {
+    private int partition(int[] nums, int left, int right) {
 
-        int pivot = nums[start];
-        int counter = start;
-        for (int i = start + 1; i <= end; i++) {
+        int pivot = nums[left];
+        int index = left;
+        for (int i = left + 1; i <= right; i++) {
             if (nums[i] < pivot) {
-                counter++;
-                swap(nums, counter, i);
+                index++;
+                swap(nums, index, i);
             }
         }
-
-        swap(nums, start, counter);
-        return counter;
-
+        swap(nums, index, left);
+        return index;
     }
 
 }
