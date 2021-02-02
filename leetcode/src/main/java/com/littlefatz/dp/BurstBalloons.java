@@ -37,7 +37,7 @@ public class BurstBalloons {
     }
 
     //题解：https://mp.weixin.qq.com/s/I0yo0XZamm-jMpG-_B3G8g
-    public int maxCoins(int[] nums) {
+    public int maxCoins3(int[] nums) {
         int length = nums.length;
         int[] points = new int[length+2];
         points[0] = 1;
@@ -59,4 +59,35 @@ public class BurstBalloons {
 
         return dp[0][length+1];
     }
+
+    public int maxCoins(int[] nums) {
+
+        int length = nums.length;
+        int[][] dp = new int[length + 2][length + 2];
+        int[] points = new int[length + 2];
+
+        points[0] = 1;
+        points[length + 1] = 1;
+        for (int i = 0; i < length; i++) {
+            points[i + 1] = nums[i];
+        }
+
+        for (int i = length; i>=0; i--) {
+            for (int j = i + 1; j < length + 2; j++) {
+                for (int k = i + 1; k < j; k++) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i][k] + dp[k][j] + points[i] * points[k] * points[j]);
+                }
+            }
+        }
+
+        return dp[0][length + 1];
+
+
+
+    }
+
+
+
+
+
 }
