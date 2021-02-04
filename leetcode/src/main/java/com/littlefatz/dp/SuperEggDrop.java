@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 //https://leetcode-cn.com/problems/super-egg-drop/
+//https://leetcode-cn.com/problems/super-egg-drop/solution/ji-ben-dong-tai-gui-hua-jie-fa-by-labuladong/
 public class SuperEggDrop {
 
     private Map<String, Integer> memo = new HashMap<>();
 
-    public int superEggDrop(int K, int N) {
+    public int superEggDrop2(int K, int N) {
         return dp(K, N);
     }
 
@@ -74,4 +75,38 @@ public class SuperEggDrop {
     private String getKey(int K, int N) {
         return K + "-" + N;
     }
+
+
+
+    public int superEggDrop(int K, int N) {
+
+        return dp2(K, N);
+    }
+
+    //虽然这个方法简单，但是超时
+    private int dp2(int K, int N) {
+
+        if (K == 1) {
+            return N;
+        }
+
+        if (N == 0) {
+            return 0;
+        }
+
+        if (memo.containsKey(getKey(K, N))) {
+            return memo.get(getKey(K, N));
+        }
+
+        int result = Integer.MAX_VALUE;
+        for (int i = 1; i <= N; i++) {
+            result = Math.min(result, Math.max(dp2(K - 1, i - 1), dp2(K, N - i)) + 1);
+            memo.put(getKey(K, N), result);
+        }
+
+        return result;
+
+    }
+
+
 }
