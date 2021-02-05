@@ -67,12 +67,39 @@ public class GenerateParentheses {
 //
 //    }
 
-    public List<String> generateParenthesis(int n) {
-        generate(n, n, "");
+    public List<String> generateParenthesis2(int n) {
+        generate2(n, n, "");
         return result;
     }
 
     private List<String> result = new ArrayList<>();
+
+    private void generate2(int left, int right, String temp) {
+
+        if (left == 0 && right == 0) {
+            result.add(temp);
+            return;
+        }
+
+        if (left > 0) {
+            generate2(left - 1, right, temp + "(");
+        }
+
+        /**
+         * 只有当右括号剩余数大于左括号剩余数，才能往下递归，以下是两种无效情况：
+         * 1. left = right： 这时候不能先加右括号
+         * 2. right < left: 这时候无论怎样填，生成的括号都是无效
+         */
+        if (right > left) {
+            generate2(left, right - 1, temp + ")");
+        }
+
+    }
+
+    public List<String> generateParenthesis(int n) {
+        generate(n, n, "");
+        return result;
+    }
 
     private void generate(int left, int right, String temp) {
 
@@ -85,45 +112,11 @@ public class GenerateParentheses {
             generate(left - 1, right, temp + "(");
         }
 
-        /**
-         * 只有当右括号剩余数大于左括号剩余数，才能往下递归，以下是两种无效情况：
-         * 1. left = right： 这时候不能先加右括号
-         * 2. right < left: 这时候无论怎样填，生成的括号都是无效
-         */
         if (right > left) {
             generate(left, right - 1, temp + ")");
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
