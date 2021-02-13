@@ -50,7 +50,7 @@ public class MaximumSubarray {
 
     }
 
-    public int maxSubArray(int[] nums) {
+    public int maxSubArray4(int[] nums) {
 
         int length = nums.length;
         if (length == 0) {
@@ -71,5 +71,29 @@ public class MaximumSubarray {
         }
 
         return max;
+    }
+
+    public int maxSubArray(int[] nums) {
+
+        int length = nums.length;
+        if (length == 0) {
+            return 0;
+        }
+
+        if (length == 1) {
+            return nums[0];
+        }
+
+        int[] dp = new int[length];
+        dp[0] = nums[0];
+        int max = dp[0];
+        for (int i = 1; i < length; i++) {
+            dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
+            max = Math.max(max, dp[i]);
+        }
+
+        return max;
+
+
     }
 }
