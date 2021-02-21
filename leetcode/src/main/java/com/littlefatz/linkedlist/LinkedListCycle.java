@@ -6,6 +6,8 @@ package com.littlefatz.linkedlist;
 
 import com.littlefatz.ListNode;
 
+import java.util.List;
+
 public class LinkedListCycle {
     public boolean hasCycle2(ListNode head) {
         ListNode walker = head;
@@ -24,7 +26,7 @@ public class LinkedListCycle {
     }
 
 
-    public boolean hasCycle(ListNode head) {
+    public boolean hasCycle3(ListNode head) {
         if (head == null) {
             return false;
         }
@@ -43,6 +45,34 @@ public class LinkedListCycle {
 
 
     }
+
+    public boolean hasCycle(ListNode head) {
+
+        if (head == null) {
+            return false;
+        }
+
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if (fast == slow) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+
+
+
+
+
 
 
 

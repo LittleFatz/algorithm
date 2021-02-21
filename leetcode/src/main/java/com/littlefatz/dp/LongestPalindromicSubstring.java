@@ -75,7 +75,7 @@ public class LongestPalindromicSubstring {
 //    }
 
 
-    public String longestPalindrome(String s) {
+    public String longestPalindrome2(String s) {
         int length = s.length();
         if (length <= 1) {
             return s;
@@ -121,7 +121,45 @@ public class LongestPalindromicSubstring {
     }
 
 
+    public String longestPalindrome(String s) {
+        int length = s.length();
+        if (length <= 1) {
+            return s;
+        }
 
+        boolean[][] dp = new boolean[length][length];
+        for (int i = 0; i < length; i++) {
+            dp[i][i] = true;
+        }
+
+        /**
+         * 这里 maxLength 必须初始化为 1，如果初始化为 0， 那么如果 s = "ab"，结果会返回空字符串，
+         * 这时候实际上需要返回 a 或者 b，因此必须初始化为 1
+         */
+        int maxLength = 1;
+        int startIndex = 0;
+
+        char[] chars = s.toCharArray();
+        for (int i = length - 2; i >= 0; i--) {
+            for (int j = i + 1; j < length; j++) {
+                if (chars[i] == chars[j]) {
+                    if (j - i < 3) {
+                        dp[i][j] = true;
+                    } else {
+                        dp[i][j] = dp[i + 1][j - 1];
+                    }
+                }
+
+                if (dp[i][j] && (j - i + 1) > maxLength) {
+                    maxLength = j - i + 1;
+                    startIndex = i;
+                }
+
+            }
+        }
+
+        return s.substring(startIndex, startIndex + maxLength);
+    }
 
 
 
