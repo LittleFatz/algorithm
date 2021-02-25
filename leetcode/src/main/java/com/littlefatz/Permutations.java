@@ -52,9 +52,46 @@ public class Permutations {
         System.out.println(results.toString());
     }
 
+//    private List<List<Integer>> result = new ArrayList<>();
+//    private int size;
+//    private boolean[] used;
+//
+//    public List<List<Integer>> permute(int[] nums) {
+//
+//        int length = nums.length;
+//        if (length == 0) {
+//            return result;
+//        }
+//
+//        size = length;
+//        used = new boolean[size];
+//        LinkedList<Integer> current = new LinkedList<>();
+//        backTrack(nums, 0, current);
+//        return result;
+//
+//    }
+//
+//    private void backTrack(int[] nums, int depth, LinkedList<Integer> current) {
+//
+//        if (depth == size) {
+//            result.add(new ArrayList<>(current));
+//            return;
+//        }
+//
+//        for (int i = 0; i < size; i++) {
+//            if (!used[i]) {
+//                current.addLast(nums[i]);
+//                used[i] = true;
+//                backTrack(nums, depth + 1, current);
+//                used[i] = false;
+//                current.removeLast();
+//            }
+//        }
+//
+//    }
+
+    private boolean[] visited;
     private List<List<Integer>> result = new ArrayList<>();
-    private int size;
-    private boolean[] used;
 
     public List<List<Integer>> permute(int[] nums) {
 
@@ -63,30 +100,33 @@ public class Permutations {
             return result;
         }
 
-        size = length;
-        used = new boolean[size];
-        LinkedList<Integer> current = new LinkedList<>();
-        backTrack(nums, 0, current);
-        return result;
+        visited = new boolean[length];
 
+        backTrack(nums, new LinkedList<Integer>());
+
+        return result;
     }
 
-    private void backTrack(int[] nums, int depth, LinkedList<Integer> current) {
-
-        if (depth == size) {
+    private void backTrack(int[] nums, LinkedList<Integer> current) {
+        if (current.size() == nums.length) {
             result.add(new ArrayList<>(current));
             return;
         }
 
-        for (int i = 0; i < size; i++) {
-            if (!used[i]) {
-                current.addLast(nums[i]);
-                used[i] = true;
-                backTrack(nums, depth + 1, current);
-                used[i] = false;
+        for (int i = 0; i < nums.length; i++) {
+            if (!visited[i]) {
+                current.add(nums[i]);
+                visited[i] = true;
+                backTrack(nums, current);
                 current.removeLast();
+                visited[i] = false;
             }
         }
-
     }
+
+
+
+
+
+
 }
