@@ -2,7 +2,7 @@ package com.littlefatz;
 
 public class LongestCommonPrefix {
 
-    public String longestCommonPrefix(String[] strs) {
+    public String longestCommonPrefix2(String[] strs) {
 
         if (strs == null || strs.length == 0) {
             return "";
@@ -21,4 +21,35 @@ public class LongestCommonPrefix {
 
         return strs[0];
     }
+
+    public String longestCommonPrefix(String[] strs) {
+
+        int count = strs.length;
+        if (count == 0) {
+            return "";
+        }
+
+        int length = strs[0].length();
+        char[] chars = strs[0].toCharArray();
+
+        for (int i = 0; i < length; i++) {
+            for (int j = 1; j < count; j++) {
+                if (i == strs[j].length() || strs[j].charAt(i) != chars[i]) {
+                    return strs[0].substring(0,i);
+                }
+            }
+        }
+
+        return strs[0];
+    }
+
+
+
+
+
+
+
+
+
+
 }
