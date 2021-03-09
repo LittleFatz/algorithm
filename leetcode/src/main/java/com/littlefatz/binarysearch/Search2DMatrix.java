@@ -73,4 +73,29 @@ public class Search2DMatrix {
         Search2DMatrix test = new Search2DMatrix();
         test.searchMatrix(new int[0][0], 0);
     }
+
+
+    public boolean findNumberIn2DArray(int[][] matrix, int target) {
+
+        if (matrix.length == 0 || matrix[0].length == 0) {
+            return false;
+        }
+
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        for (int i = 0; i < rows; i++) {
+
+            if (target >= matrix[i][0] && target <= matrix[i][cols - 1]) {
+                for (int j = 0; j < cols; j++) {
+                    if (target == matrix[i][j]) {
+                        return true;
+                    }
+                }
+            }
+
+        }
+
+        return false;
+    }
 }
