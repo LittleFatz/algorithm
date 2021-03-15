@@ -1,4 +1,4 @@
-package com.littlefatz;
+package com.littlefatz.slidingwindow;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -74,7 +74,7 @@ public class SlidingWindowMaximum {
         return result;
     }
 
-    public int[] maxSlidingWindow(int[] nums, int k) {
+    public int[] maxSlidingWindow4(int[] nums, int k) {
 
         int length = nums.length;
         int[] result = new int[length - k + 1];
@@ -102,8 +102,37 @@ public class SlidingWindowMaximum {
         return result;
     }
 
+    //剑指offer
+    public int[] maxSlidingWindow(int[] nums, int k) {
 
+        int length = nums.length;
+        if (length == 0) {
+            return new int[0];
+        }
 
+        int[] result = new int[length - k + 1];
+        Deque<Integer> deque = new LinkedList<>();
+        int index = 0;
+
+        for (int i = 0; i < length; i++) {
+
+            while (!deque.isEmpty() && (deque.peekFirst() <= i - k)) {
+                deque.removeFirst();
+            }
+
+            while (!deque.isEmpty() && (nums[deque.peekLast()] < nums[i])) {
+                deque.removeLast();
+            }
+            deque.addLast(i);
+
+            if (i >= k - 1) {
+                result[index++] = nums[deque.peekFirst()];
+            }
+        }
+
+        return result;
+
+    }
 
 
 

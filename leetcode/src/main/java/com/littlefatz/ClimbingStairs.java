@@ -64,7 +64,7 @@ public class ClimbingStairs {
         int step2 = 2;
 
         for (int i = 3; i <= n; i++) {
-            result = step1 + step2;
+            result = (step1 + step2);
             step1 = step2;
             step2 = result;
         }
@@ -72,7 +72,29 @@ public class ClimbingStairs {
         return result;
     }
 
+    public int numWays(int n) {
 
+        if (n == 1 || n == 0) {
+            return 1;
+        }
+
+        if (n == 2) {
+            return 2;
+        }
+
+        int oneStep = 1;
+        int twoStep = 2;
+
+        int totalCount = 0;
+        for (int i = 3; i <= n; i++) {
+            totalCount = (oneStep + twoStep) % 1000000007;
+            oneStep = twoStep;
+            twoStep = totalCount;
+        }
+
+        return totalCount;
+
+    }
 
 
 
