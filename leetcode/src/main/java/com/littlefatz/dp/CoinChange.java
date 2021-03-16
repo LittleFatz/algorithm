@@ -93,7 +93,7 @@ public class CoinChange {
         return (dp[amount] == amount + 1) ? -1 : dp[amount];
     }
 
-    public int coinChange(int[] coins, int amount) {
+    public int coinChange5(int[] coins, int amount) {
 
         if (amount == 0) {
             return 0;
@@ -114,6 +114,16 @@ public class CoinChange {
 
         return dp[amount] == (amount + 1) ? -1 : dp[amount];
 
+    }
+
+    public int coinChange(int[] coins, int amount) {
+
+        if (amount == 0) {
+            return 0;
+        }
+
+        int length = coins.length;
+        if ()
     }
 }
 
