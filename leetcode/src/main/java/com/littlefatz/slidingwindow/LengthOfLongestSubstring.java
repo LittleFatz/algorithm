@@ -90,7 +90,7 @@ public class LengthOfLongestSubstring {
         return max;
     }
 
-    public int lengthOfLongestSubstring(String s) {
+    public int lengthOfLongestSubstring5(String s) {
 
         int length = s.length();
         if (length == 0) {
@@ -114,7 +114,27 @@ public class LengthOfLongestSubstring {
 
 
 
+    public int lengthOfLongestSubstring(String s) {
 
+        int length = s.length();
+        if (length <= 1) {
+            return length;
+        }
+
+        int max = 1;
+        int start = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < length; i++) {
+            if (map.containsKey(chars[i])) {
+                start = Math.max(start, map.get(chars[i]) + 1);
+            }
+            map.put(chars[i], i);
+            max = Math.max(max, i - start + 1);
+        }
+
+        return max;
+    }
 
 
 
