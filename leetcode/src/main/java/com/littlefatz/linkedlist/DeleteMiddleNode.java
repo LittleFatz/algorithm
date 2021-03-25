@@ -1,4 +1,6 @@
-package com.littlefatz;
+package com.littlefatz.linkedlist;
+
+import com.littlefatz.ListNode;
 
 //https://leetcode-cn.com/problems/delete-middle-node-lcci/
 //https://leetcode-cn.com/problems/delete-middle-node-lcci/solution/nao-jin-ji-zhuan-wan-by-acvv_itdef-d19d/
