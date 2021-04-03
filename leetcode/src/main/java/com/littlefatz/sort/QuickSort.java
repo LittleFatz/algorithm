@@ -153,11 +153,49 @@ public class QuickSort {
 //    }
 
 
+//
+//
+//    public int[] sortArray(int[] nums) {
+//        int length = nums.length;
+//        if (length == 0) {
+//            return nums;
+//        }
+//
+//        quickSort(nums, 0, length - 1);
+//        return nums;
+//    }
+//
+//    private void quickSort(int[] nums, int start, int end) {
+//
+//        if (start >= end) {
+//            return;
+//        }
+//
+//        int index = partition(nums, start, end);
+//        quickSort(nums, start, index - 1);
+//        quickSort(nums, index + 1, end);
+//    }
+//
+//    private int partition(int[] nums, int start, int end) {
+//
+//        int pivot = nums[start];
+//        int counter = start;
+//        for (int i = start + 1; i <= end; i++) {
+//            if (nums[i] <= pivot) {
+//                counter++;
+//                swap(nums, counter, i);
+//            }
+//        }
+//
+//        swap(nums, counter, start);
+//        return counter;
+//    }
+
 
 
     public int[] sortArray(int[] nums) {
         int length = nums.length;
-        if (length == 0) {
+        if (length <= 1) {
             return nums;
         }
 
@@ -165,29 +203,29 @@ public class QuickSort {
         return nums;
     }
 
-    private void quickSort(int[] nums, int start, int end) {
+    private void quickSort(int[] nums, int left, int right) {
 
-        if (start >= end) {
-            return;
+        if (left < right) {
+            int pivot = partition(nums, left, right);
+            quickSort(nums, left, pivot - 1);
+            quickSort(nums, pivot + 1, right);
         }
-
-        int index = partition(nums, start, end);
-        quickSort(nums, start, index - 1);
-        quickSort(nums, index + 1, end);
     }
 
     private int partition(int[] nums, int start, int end) {
 
         int pivot = nums[start];
         int counter = start;
+
         for (int i = start + 1; i <= end; i++) {
-            if (nums[i] <= pivot) {
+            if (nums[i] < pivot) {
                 counter++;
-                swap(nums, counter, i);
+                swap(nums, i, counter);
             }
         }
-
-        swap(nums, counter, start);
+        swap(nums, start, counter);
         return counter;
     }
+
+
 }
