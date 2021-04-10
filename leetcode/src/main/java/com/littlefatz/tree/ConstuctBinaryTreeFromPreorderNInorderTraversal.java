@@ -2,6 +2,7 @@ package com.littlefatz.tree;
 
 
 //https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+//https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/solution/qian-xu-bian-li-python-dai-ma-java-dai-ma-by-liwei/
 public class ConstuctBinaryTreeFromPreorderNInorderTraversal {
 
 //    public TreeNode buildTree(int[] preorder, int[] inorder) {
@@ -41,7 +42,7 @@ public class ConstuctBinaryTreeFromPreorderNInorderTraversal {
     //pochmann参考答案
     private int in = 0;
     private int pre = 0;
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
+    public TreeNode buildTree2(int[] preorder, int[] inorder) {
         return build(preorder, inorder, Integer.MIN_VALUE);
     }
     private TreeNode build(int[] preorder, int[] inorder, int stop) {
@@ -69,6 +70,13 @@ public class ConstuctBinaryTreeFromPreorderNInorderTraversal {
         System.out.println("herer");
 
     }
+
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        return null;
+
+    }
+
+
 
 
 }
