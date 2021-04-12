@@ -22,7 +22,7 @@ public class LongestCommonPrefix {
         return strs[0];
     }
 
-    public String longestCommonPrefix(String[] strs) {
+    public String longestCommonPrefix3(String[] strs) {
 
         int count = strs.length;
         if (count == 0) {
@@ -45,8 +45,29 @@ public class LongestCommonPrefix {
 
 
 
+    public String longestCommonPrefix(String[] strs) {
+        int length = strs.length;
+        if (length == 0) {
+            return "";
+        }
+        if (length == 1) {
+            return strs[0];
+        }
 
-//TEST
+        String firstString = strs[0];
+        int firstLength = firstString.length();
+        int maxLength = 0;
+        for (int i = 0; i < firstLength; i++) {
+            for (int j = 1; j < length; j++) {
+                if (i == strs[j].length() || firstString.charAt(i) != strs[j].charAt(i)) {
+                    return firstString.substring(0, i);
+                }
+            }
+        }
+
+        return firstString;
+    }
+
 
 
 
