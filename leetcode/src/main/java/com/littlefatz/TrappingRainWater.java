@@ -125,7 +125,7 @@ public class TrappingRainWater {
      *         left                      right
      * 对于位置left而言，它左边最大值一定是left_max，右边最大值“大于等于”right_max，这时候，如果left_max<right_max成立，那么它就知道自己能存多少水了。无论右边将来会不会出现更大的right_max，都不影响这个结果。 所以当left_max<right_max时，我们就希望去处理left下标，反之，我们希望去处理right下标。
      */
-    public int trap(int[] height) {
+    public int trap5(int[] height) {
 
 
         int length = height.length;
@@ -155,6 +155,37 @@ public class TrappingRainWater {
         return rain;
 
     }
+
+    public int trap(int[] height) {
+
+        int length = height.length;
+        if (length <= 1) {
+            return 0;
+        }
+
+        int left = 0;
+        int right = length - 1;
+        int leftMax = 0;
+        int rightMax = 0;
+        int maxRain = 0;
+
+        while (left < right) {
+            if (height[left] <= height[right]) {
+                leftMax = Math.max(leftMax, height[left]);
+                maxRain += leftMax - height[left];
+                left++;
+            } else {
+                rightMax = Math.max(rightMax, height[right]);
+                maxRain += rightMax - height[right];
+                right--;
+            }
+        }
+
+        return maxRain;
+    }
+
+
+
 
 
 
