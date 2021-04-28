@@ -12,45 +12,45 @@ public class Permutations {
 //    private int size = 0;
 //    private boolean[] used;
 
-    public List<List<Integer>> permute2(int[] nums) {
-        if (nums.length == 0) {
-            return results;
-        }
-
-        this.size = nums.length;
-        used = new boolean[size];
-        LinkedList<Integer> current = new LinkedList<>();
-        backTrack(nums, 0, current);
-        return results;
-    }
-
-
-    private void backTrack2(int[] nums, int depth, LinkedList<Integer> current) {
-
-        if (depth == size) {
-            results.add(new LinkedList<>(current));
-            return;
-        }
-
-        for (int i = 0; i < size; i++) {
-            if (used[i]) {
-                continue;
-            }
-
-            current.add(nums[i]);
-            used[i] = true;
-            backTrack(nums, depth+1, current);
-            current.removeLast();
-            used[i] = false;
-
-        }
-    }
-
-    public static void main(String[] args) {
-        Permutations test = new Permutations();
-        List<List<Integer>> results = test.permute(new int[]{1,2,3});
-        System.out.println(results.toString());
-    }
+//    public List<List<Integer>> permute2(int[] nums) {
+//        if (nums.length == 0) {
+//            return results;
+//        }
+//
+//        this.size = nums.length;
+//        used = new boolean[size];
+//        LinkedList<Integer> current = new LinkedList<>();
+//        backTrack(nums, 0, current);
+//        return results;
+//    }
+//
+//
+//    private void backTrack2(int[] nums, int depth, LinkedList<Integer> current) {
+//
+//        if (depth == size) {
+//            results.add(new LinkedList<>(current));
+//            return;
+//        }
+//
+//        for (int i = 0; i < size; i++) {
+//            if (used[i]) {
+//                continue;
+//            }
+//
+//            current.add(nums[i]);
+//            used[i] = true;
+//            backTrack(nums, depth+1, current);
+//            current.removeLast();
+//            used[i] = false;
+//
+//        }
+//    }
+//
+//    public static void main(String[] args) {
+//        Permutations test = new Permutations();
+//        List<List<Integer>> results = test.permute(new int[]{1,2,3});
+//        System.out.println(results.toString());
+//    }
 
 //    private List<List<Integer>> result = new ArrayList<>();
 //    private int size;

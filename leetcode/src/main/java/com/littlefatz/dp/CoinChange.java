@@ -53,7 +53,7 @@ public class CoinChange {
         int[] coins = new int[]{1,2,5};
 
 
-        System.out.println(test.coinChange(coins,11));
+//        System.out.println(test.coinChange(coins,11));
     }
 
     public int coinChange2(int[] coins, int amount) {
@@ -123,7 +123,23 @@ public class CoinChange {
         }
 
         int length = coins.length;
-        if ()
+        int[] dp = new int[amount + 1];
+        for (int i = 1; i < amount + 1; i++) {
+            dp[i] = amount + 1;
+        }
+
+        Arrays.sort(coins);
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < length; j++) {
+                if (coins[j] <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+                } else {
+                    break;
+                }
+            }
+        }
+
+        return dp[amount] == amount + 1 ? -1 : dp[amount];
     }
 }
 
