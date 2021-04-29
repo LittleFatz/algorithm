@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 //https://leetcode-cn.com/problems/minimum-window-substring/
-//https://labuladong.gitbook.io/algo/di-ling-zhang-bi-du-xi-lie/hua-dong-chuang-kou-ji-qiao-jin-jie
+//https://labuladong.gitbook.io/algo/shu-ju-jie-gou-xi-lie/shou-ba-shou-shua-shu-zu-ti-mu/hua-dong-chuang-kou-ji-qiao-jin-jie#yi-zui-xiao-fu-gai-zi-chuan
 public class MinimumWindowSubstring {
 
     public String minWindow2(String s, String t) {
@@ -53,6 +53,7 @@ public class MinimumWindowSubstring {
 
             while (distance == tLength) {
                 if (right - left < min) {
+                    //因为上面已经 right++，所以这里计算 min 的时候不需要 right - left + 1
                     min = right - left;
                     begin = left;
                 }
@@ -82,7 +83,7 @@ public class MinimumWindowSubstring {
         System.out.println(test.minWindow("aa", "aa"));
     }
 
-    public String minWindow(String s, String t) {
+    public String minWindow3(String s, String t) {
 
         int sLength = s.length();
         int tLength = t.length();
@@ -140,5 +141,73 @@ public class MinimumWindowSubstring {
 
 
     }
+
+
+
+
+    public String minWindow(String s, String t) {
+
+
+        int sLength = s.length();
+        int tLength = t.length();
+
+        if (sLength == 0 || tLength == 0) {
+            return "";
+        }
+
+        Map<Character, Integer> need = new HashMap<>();
+        char[] tChars = t.toCharArray();
+        for (int i = 0; i < tLength; i++) {
+            need.put(tChars[i], need.getOrDefault(tChars[i], 0) + 1);
+        }
+
+        int valid = 0;
+        Map<Character, Integer> window = new HashMap<>();
+        int left = 0;
+        int right = 0;
+        char[] sChars = s.toCharArray();
+        int minLength = Integer.MAX_VALUE;
+        int start = 0;
+
+        while (right < sLength) {
+            char c = sChars[right];
+            right++;
+
+            if (need.containsKey(c)) {
+                window.put(c, window.getOrDefault(c, 0) + 1);
+                if (window.get(c).equals(need.get(c))) {
+                    valid++;
+                }
+            }
+
+            while (valid == need.size()) {
+                if (right - left < minLength) {
+                    minLength = right - left;
+                    start = left;
+                }
+
+                char leftChar = sChars[left];
+                left++;
+                if (need.containsKey(leftChar)) {
+                    window.put(leftChar, window.get(leftChar) - 1);
+                    if (window.get(leftChar) < need.get(leftChar)) {
+                        valid--;
+                    }
+                }
+            }
+        }
+
+        return minLength == Integer.MAX_VALUE ? "" : s.substring(start, start + minLength);
+
+    }
+
+
+
+
+
+
+
+
+
 
 }

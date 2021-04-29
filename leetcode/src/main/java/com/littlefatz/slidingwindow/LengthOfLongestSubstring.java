@@ -26,6 +26,8 @@ public class LengthOfLongestSubstring {
                  * 例如 abcdefghda 这个字符串
                  * 遍历到第二个 d 的时候，start = 3（第一个 d 的index）, start 会被更新为 4
                  * 接下来遍历到 a，如果 start = map.get(array[i]) + 1 的话，则 start = 1，最后返回的结果错误
+                 *
+                 * 另一个用途：假如这个重复的字符是出现在 start 之前，那么这个字符是不会影响当前这个不重复字符串的
                  */
                 start = Math.max(start, map.get(array[i]) + 1);
             }

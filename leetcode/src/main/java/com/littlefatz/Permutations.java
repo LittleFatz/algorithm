@@ -8,10 +8,10 @@ import java.util.List;
 //回溯法，原理类似于深度优先遍历树，每次遍历到叶子节点后，需要回退到上一个状态
 public class Permutations {
 
-    private List<List<Integer>> results = new ArrayList<>();
+//    private List<List<Integer>> results = new ArrayList<>();
 //    private int size = 0;
 //    private boolean[] used;
-
+//
 //    public List<List<Integer>> permute2(int[] nums) {
 //        if (nums.length == 0) {
 //            return results;
@@ -25,7 +25,7 @@ public class Permutations {
 //    }
 //
 //
-//    private void backTrack2(int[] nums, int depth, LinkedList<Integer> current) {
+//    private void backTrack(int[] nums, int depth, LinkedList<Integer> current) {
 //
 //        if (depth == size) {
 //            results.add(new LinkedList<>(current));
@@ -45,12 +45,12 @@ public class Permutations {
 //
 //        }
 //    }
-//
-//    public static void main(String[] args) {
-//        Permutations test = new Permutations();
-//        List<List<Integer>> results = test.permute(new int[]{1,2,3});
-//        System.out.println(results.toString());
-//    }
+
+    public static void main(String[] args) {
+        Permutations test = new Permutations();
+        List<List<Integer>> results = test.permute(new int[]{1,2,3});
+        System.out.println(results.toString());
+    }
 
 //    private List<List<Integer>> result = new ArrayList<>();
 //    private int size;
@@ -90,8 +90,44 @@ public class Permutations {
 //
 //    }
 
+//    private boolean[] visited;
+//    private List<List<Integer>> result = new ArrayList<>();
+//
+//    public List<List<Integer>> permute(int[] nums) {
+//
+//        int length = nums.length;
+//        if (length == 0) {
+//            return result;
+//        }
+//
+//        visited = new boolean[length];
+//
+//        backTrack(nums, new LinkedList<Integer>());
+//
+//        return result;
+//    }
+//
+//    private void backTrack(int[] nums, LinkedList<Integer> current) {
+//        if (current.size() == nums.length) {
+//            result.add(new ArrayList<>(current));
+//            return;
+//        }
+//
+//        for (int i = 0; i < nums.length; i++) {
+//            if (!visited[i]) {
+//                current.add(nums[i]);
+//                visited[i] = true;
+//                backTrack(nums, current);
+//                current.removeLast();
+//                visited[i] = false;
+//            }
+//        }
+//    }
+
+
+
+    private List<List<Integer>> result = new LinkedList<>();
     private boolean[] visited;
-    private List<List<Integer>> result = new ArrayList<>();
 
     public List<List<Integer>> permute(int[] nums) {
 
@@ -101,32 +137,28 @@ public class Permutations {
         }
 
         visited = new boolean[length];
-
-        backTrack(nums, new LinkedList<Integer>());
-
+        LinkedList<Integer> tempList = new LinkedList<>();
+        backtrack(nums, tempList);
         return result;
     }
 
-    private void backTrack(int[] nums, LinkedList<Integer> current) {
-        if (current.size() == nums.length) {
-            result.add(new ArrayList<>(current));
-            return;
+    private void backtrack(int[] nums, LinkedList<Integer> tempList) {
+        if (tempList.size() == nums.length) {
+            result.add(new ArrayList<>(tempList));
+            return ;
         }
 
         for (int i = 0; i < nums.length; i++) {
             if (!visited[i]) {
-                current.add(nums[i]);
+                tempList.add(nums[i]);
                 visited[i] = true;
-                backTrack(nums, current);
-                current.removeLast();
+                backtrack(nums,tempList);
                 visited[i] = false;
+                tempList.removeLast();
             }
         }
+
     }
-
-
-
-
 
 
 }

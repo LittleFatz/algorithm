@@ -34,7 +34,7 @@ public class FindFirstAndLastPostionOfElement {
         }
 
         /**
-         * 当 target 比数组中所有元素都大的时候，left 会不断向右移动知道 left = nums.length，因此需要检查 left 是否越界
+         * 当 target 比数组中所有元素都大的时候，left 会不断向右移动直到 left = nums.length，因此需要检查 left 是否越界
          * 当 target 比数组中所有元素都小的时候，只有 right 不断向左移动，left始终等于 0 ，因此不需要检查是否越下界
          */
         if (left >= nums.length || nums[left] != target) {
@@ -73,16 +73,16 @@ public class FindFirstAndLastPostionOfElement {
         return right;
     }
 
-    public int[] searchRange(int[] nums, int target) {
-        int length = nums.length;
-        if (length == 0) {
-            return new int[]{-1, -1};
-        }
-
-        int leftBound = findLeftBound(nums, target);
-        int rightBound = findRightBound(nums, target);
-        return new int[]{leftBound, rightBound};
-    }
+//    public int[] searchRange(int[] nums, int target) {
+//        int length = nums.length;
+//        if (length == 0) {
+//            return new int[]{-1, -1};
+//        }
+//
+//        int leftBound = findLeftBound(nums, target);
+//        int rightBound = findRightBound(nums, target);
+//        return new int[]{leftBound, rightBound};
+//    }
 
 
 
@@ -137,21 +137,103 @@ public class FindFirstAndLastPostionOfElement {
 
 
 
-    private int findRightBound(int[] nums, int target) {
+//    private int findRightBound(int[] nums, int target) {
+//
+//        int length = nums.length;
+//        int left = 0;
+//        int right = length - 1;
+//
+//        while (left <= right) {
+//
+//            int middle = left + (right - left) / 2;
+//            if (target == nums[middle]) {
+//                left = middle + 1;
+//            } else if (target < nums[middle]) {
+//                right = middle - 1;
+//            } else if (target > nums[middle]) {
+//                left = middle + 1;
+//            }
+//        }
+//
+//        if (right < 0 || nums[right] != target) {
+//            return -1;
+//        }
+//
+//        return right;
+//    }
+//
+//    private int findLeftBound(int[] nums, int target) {
+//        int length = nums.length;
+//        int left = 0;
+//        int right = length - 1;
+//
+//        while (left <= right) {
+//
+//            int middle = left + (right - left) / 2;
+//            if (target == nums[middle]) {
+//                right = middle - 1;
+//            } else if (target < nums[middle]) {
+//                right = middle - 1;
+//            } else if (target > nums[middle]) {
+//                left = middle + 1;
+//            }
+//        }
+//
+//        if (left >= length || nums[left] != target) {
+//            return -1;
+//        }
+//
+//        return left;
+//    }
+
+
+    public int[] searchRange(int[] nums, int target) {
 
         int length = nums.length;
+        if (length == 0) {
+            return new int[]{-1, -1};
+        }
+
+        int leftBound = findLeftBound(nums, target);
+        int rightBound = findRightBound(nums, target);
+
+        return new int[]{leftBound, rightBound};
+
+    }
+
+    private int findLeftBound(int[] nums, int target) {
+
         int left = 0;
-        int right = length - 1;
-
+        int right = nums.length - 1;
         while (left <= right) {
-
             int middle = left + (right - left) / 2;
-            if (target == nums[middle]) {
-                left = middle + 1;
-            } else if (target < nums[middle]) {
+            if (nums[middle] == target) {
                 right = middle - 1;
-            } else if (target > nums[middle]) {
+            } else if (nums[middle] < target) {
                 left = middle + 1;
+            } else {
+                right = middle - 1;
+            }
+        }
+
+        if (left >= nums.length || nums[left] != target) {
+            return -1;
+        }
+
+        return left;
+    }
+
+    private int findRightBound(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int middle = left + (right - left) / 2;
+            if (nums[middle] == target) {
+                left = middle + 1;
+            } else if (nums[middle] < target) {
+                left = middle + 1;
+            } else {
+                right = middle - 1;
             }
         }
 
@@ -161,35 +243,6 @@ public class FindFirstAndLastPostionOfElement {
 
         return right;
     }
-
-    private int findLeftBound(int[] nums, int target) {
-        int length = nums.length;
-        int left = 0;
-        int right = length - 1;
-
-        while (left <= right) {
-
-            int middle = left + (right - left) / 2;
-            if (target == nums[middle]) {
-                right = middle - 1;
-            } else if (target < nums[middle]) {
-                right = middle - 1;
-            } else if (target > nums[middle]) {
-                left = middle + 1;
-            }
-        }
-
-        if (left >= length || nums[left] != target) {
-            return -1;
-        }
-
-        return left;
-    }
-
-
-
-
-
 
 
 

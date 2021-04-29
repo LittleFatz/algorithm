@@ -28,7 +28,7 @@ public class GetKthFromEnd {
 
     }
 
-    public ListNode getKthFromEnd(ListNode head, int k) {
+    public ListNode getKthFromEnd3(ListNode head, int k) {
 
         ListNode slow = head;
         ListNode fast = head;
@@ -48,7 +48,29 @@ public class GetKthFromEnd {
     }
 
 
+    public ListNode getKthFromEnd(ListNode head, int k) {
 
+        if (head == null) {
+            return head;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        int count = k;
+        while (count > 0 && fast != null) {
+            count--;
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        return slow;
+
+    }
 
 
 
