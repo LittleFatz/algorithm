@@ -73,7 +73,7 @@ public class LinkedListCycleII {
 
     }
 
-    public ListNode detectCycle(ListNode head) {
+    public ListNode detectCycle4(ListNode head) {
         if (head == null) {
             return null;
         }
@@ -103,6 +103,40 @@ public class LinkedListCycleII {
             return slow;
         }
         return null;
+
+
+    }
+
+    public ListNode detectCycle(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        ListNode fast = head;
+        ListNode slow = head;
+        boolean meet = false;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                meet = true;
+                break;
+            }
+        }
+
+        if (meet) {
+            fast = head;
+            while (fast != slow) {
+                slow = slow.next;
+                fast = fast.next;
+            }
+
+            return fast;
+        } else {
+            return null;
+        }
+
 
 
     }
