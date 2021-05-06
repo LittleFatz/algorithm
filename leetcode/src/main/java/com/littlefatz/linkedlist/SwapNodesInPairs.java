@@ -1,4 +1,6 @@
-package com.littlefatz;
+package com.littlefatz.linkedlist;
+
+import com.littlefatz.ListNode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,20 +8,20 @@ import java.util.stream.IntStream;
 
 //https://leetcode.com/problems/swap-nodes-in-pairs
 public class SwapNodesInPairs {
-    public ListNode swapPairs(ListNode head) {
-
-        ListNode current = head;
-        if (current != null && current.next != null) {
-            ListNode next = current.next;
-            ListNode temp = swapPairs(next.next);
-            next.next = current;
-            current.next = temp;
-            return next;
-        } else {
-            return current;
-        }
-
-    }
+//    public ListNode swapPairs(ListNode head) {
+//
+//        ListNode current = head;
+//        if (current != null && current.next != null) {
+//            ListNode next = current.next;
+//            ListNode temp = swapPairs(next.next);
+//            next.next = current;
+//            current.next = temp;
+//            return next;
+//        } else {
+//            return current;
+//        }
+//
+//    }
 
     public ListNode swapPairs2(ListNode head) {
 
@@ -61,5 +63,31 @@ public class SwapNodesInPairs {
 
     }
 
+
+    public ListNode swapPairs(ListNode head) {
+
+        ListNode pre = new ListNode(-1);
+        pre.next = head;
+        ListNode dummy = pre;
+
+        ListNode current = head;
+        while (current != null && current.next != null) {
+            ListNode next = current.next;
+            ListNode nextStart = next.next;
+
+            //swap
+            current.next = nextStart;
+            next.next = current;
+            pre.next = next;
+
+            //set for next loop
+            pre = current;
+            current = nextStart;
+
+        }
+
+        return dummy.next;
+
+    }
 }
 
