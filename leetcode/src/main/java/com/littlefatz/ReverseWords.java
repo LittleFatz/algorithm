@@ -1,11 +1,14 @@
 package com.littlefatz;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Stack;
 
 //https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/
 public class ReverseWords {
 
-    public String reverseWords(String s) {
+    public String reverseWords3(String s) {
         if (s == null) {
             return s;
         }
@@ -40,5 +43,16 @@ public class ReverseWords {
         }
         return res.toString().trim(); // 转化为字符串并返回
     }
+
+
+
+    public String reverseWords(String s) {
+
+        s = s.trim();
+        List<String> splitList = Arrays.asList(s.split("\\s+"));
+        Collections.reverse(splitList);;
+        return String.join(" ", splitList);
+    }
+
 
 }
