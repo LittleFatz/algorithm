@@ -5,7 +5,7 @@ import com.littlefatz.ListNode;
 //https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/
 public class DeleteNode {
 
-    public ListNode deleteNode(ListNode head, int val) {
+    public ListNode deleteNode2(ListNode head, int val) {
 
         ListNode current = head;
         ListNode pre = null;
@@ -24,4 +24,17 @@ public class DeleteNode {
         }
         return head;
     }
+
+//https://leetcode-cn.com/problems/delete-node-in-a-linked-list/
+    public void deleteNode(ListNode node) {
+        ListNode next = node.next;
+        node.val = next.val;
+        node.next = next.next;
+    }
+
+
+
+
+
+
 }
