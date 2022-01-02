@@ -68,7 +68,7 @@ public class AddTwoNumbers {
 
     }
 
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public ListNode addTwoNumbers3(ListNode l1, ListNode l2) {
 
         if (l1 == null) {
             return l2;
@@ -100,6 +100,54 @@ public class AddTwoNumbers {
             carry = sum / 10;
             current.next = new ListNode(value);
             current = current.next;
+
+        }
+
+        return head.next;
+    }
+
+
+
+
+
+
+
+
+
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+
+
+        int carry = 0;
+        ListNode head = new ListNode(0);
+        ListNode current = head;
+
+        while (l1 != null || l2 != null || carry != 0) {
+            int val1 = 0;
+            if (l1 != null) {
+                val1 = l1.val;
+                l1 = l1.next;
+            }
+
+            int val2 = 0;
+            if (l2 != null) {
+                val2 = l2.val;
+                l2 = l2.next;
+            }
+
+            int sum = val1 + val2 + carry;
+            int newVal = sum % 10;
+            carry = sum / 10;
+            ListNode newNode = new ListNode(newVal);
+            current.next = newNode;
+            current = newNode;
 
         }
 
