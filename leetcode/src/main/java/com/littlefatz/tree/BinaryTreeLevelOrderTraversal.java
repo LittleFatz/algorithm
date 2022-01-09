@@ -70,12 +70,12 @@ public class BinaryTreeLevelOrderTraversal {
                     queue.add(node.right);
                 }
             }
-        res.add(level);
+            res.add(level);
         }
         return res;
     }
 
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> levelOrder4(TreeNode root) {
         if (root == null) {
             return results;
         }
@@ -103,5 +103,53 @@ public class BinaryTreeLevelOrderTraversal {
 
         return results;
     }
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+
+        Queue<TreeNode> deque = new LinkedList<>();
+        deque.add(root);
+        while (!deque.isEmpty()) {
+            int count = deque.size();
+            List<Integer> tempList = new LinkedList<>();
+            for (int i = 0; i < count; i++) {
+                TreeNode node = deque.poll();
+                tempList.add(node.val);
+                if (node.left != null) {
+                    deque.add(node.left);
+                }
+                if (node.right != null) {
+                    deque.add(node.right);
+                }
+            }
+            result.add(tempList);
+
+
+        }
+
+        return result;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
