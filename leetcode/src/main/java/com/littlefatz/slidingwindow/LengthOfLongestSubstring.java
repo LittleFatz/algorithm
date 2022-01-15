@@ -3,6 +3,7 @@ package com.littlefatz.slidingwindow;
 import java.util.*;
 
 //https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
+//https://labuladong.gitee.io/algo/2/21/58/
 public class LengthOfLongestSubstring {
 
     public int lengthOfLongestSubstring2(String s) {
@@ -138,7 +139,7 @@ public class LengthOfLongestSubstring {
         return max;
     }
 
-    public int lengthOfLongestSubstring(String s) {
+    public int lengthOfLongestSubstring7(String s) {
 
         int length = s.length();
         if (length == 0) {
@@ -161,6 +162,44 @@ public class LengthOfLongestSubstring {
         return maxLength;
 
     }
+
+    public int lengthOfLongestSubstring(String s) {
+
+        if (s.isEmpty()) {
+            return 0;
+        }
+
+        int length = s.length();
+        int start = 0;
+        int max = 1;
+        Map<Character, Integer> map = new HashMap<>();
+        char[] chars = s.toCharArray();
+
+        for (int i = 0; i < length; i++) {
+            if (map.containsKey(chars[i])) {
+                start = Math.max(start, map.get(chars[i]) + 1);
+            }
+
+            map.put(chars[i], i);
+            max = Math.max(max, i - start + 1);
+        }
+
+        return max;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

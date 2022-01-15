@@ -1,6 +1,8 @@
 package com.littlefatz.tree;
 
 
+import sun.awt.image.ImageWatched;
+
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -9,7 +11,7 @@ import java.util.List;
 //https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/
 public class BinaryTreeZigzagTraversal {
 
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+    public List<List<Integer>> zigzagLevelOrder3(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         Deque<TreeNode> deque = new LinkedList<>();
         if (root == null) {
@@ -83,6 +85,52 @@ public class BinaryTreeZigzagTraversal {
         }
         return res;
     }
+
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+
+        Deque<TreeNode> deque = new LinkedList<>();
+        deque.addLast(root);
+        int depth = 0;
+        while (!deque.isEmpty()) {
+            int count = deque.size();
+            List<Integer> temp = new LinkedList<>();
+            for (int i = 0; i < count; i++) {
+                TreeNode node = deque.poll();
+                if (depth % 2 == 0) {
+                    temp.add(node.val);
+                } else {
+                    temp.add(0, node.val);
+                }
+
+                if (node.left != null) {
+                    deque.offer(node.left);
+                }
+                if (node.right != null) {
+                    deque.offer(node.right);
+                }
+            }
+            result.add(temp);
+            depth++;
+        }
+
+        return result;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -5,7 +5,7 @@ public class PathSum {
 
     private int targetSum;
 
-    public boolean hasPathSum(TreeNode root, int targetSum) {
+    public boolean hasPathSum2(TreeNode root, int targetSum) {
         
         if (root == null) {
             return false;
@@ -16,7 +16,7 @@ public class PathSum {
         
     }
 
-    private boolean check(TreeNode currentNode, int currentSum) {
+    private boolean check2(TreeNode currentNode, int currentSum) {
 
         if (currentNode != null) {
             /**
@@ -32,5 +32,32 @@ public class PathSum {
             return false;
         }
 
+    }
+
+
+
+
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return false;
+        }
+
+        this.targetSum = targetSum;
+
+        return check(root, 0);
+
+    }
+
+    private boolean check(TreeNode currentNode, int currentSum) {
+        if (currentNode == null) {
+            return false;
+        }
+
+        int tempSum = currentSum + currentNode.val;
+        if (currentNode.left == null && currentNode.right == null) {
+            return tempSum == this.targetSum;
+        }
+
+        return check(currentNode.left, tempSum) || check(currentNode.right, tempSum);
     }
 }
