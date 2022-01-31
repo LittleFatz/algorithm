@@ -145,7 +145,7 @@ public class MinimumWindowSubstring {
 
 
 
-    public String minWindow(String s, String t) {
+    public String minWindow4(String s, String t) {
 
 
         int sLength = s.length();
@@ -171,7 +171,7 @@ public class MinimumWindowSubstring {
 
         while (right < sLength) {
             char c = sChars[right];
-            right++;
+
 
             if (need.containsKey(c)) {
                 window.put(c, window.getOrDefault(c, 0) + 1);
@@ -195,13 +195,70 @@ public class MinimumWindowSubstring {
                     }
                 }
             }
+
+            right++;
         }
 
         return minLength == Integer.MAX_VALUE ? "" : s.substring(start, start + minLength);
 
     }
 
+    public String minWindow(String s, String t) {
+        int sLength = s.length();
+        int tLength = t.length();
 
+        if (sLength == 0 || tLength == 0) {
+            return "";
+        }
+
+        int left = 0;
+        int right = 0;
+        Map<Character, Integer> need = new HashMap<>();
+        Map<Character, Integer> window = new HashMap<>();
+
+        int valid = 0;
+        int minLength = Integer.MAX_VALUE;
+        int start = 0;
+
+        for (char c : t.toCharArray()) {
+            need.put(c, need.getOrDefault(c, 0) + 1);
+        }
+
+        char[] sChars = s.toCharArray();
+
+        while (right < sLength) {
+            char c = sChars[right];
+            if (need.containsKey(c)) {
+                int existCount = window.getOrDefault(c, 0);
+                window.put(c, existCount + 1);
+                if (need.get(c).equals(window.get(c))) {
+                    valid++;
+                }
+            }
+
+            right++;
+            while (valid == need.size()) {
+                if (right - left + 1 < minLength) {
+                    start = left;
+                    minLength = right - left + 1;
+                }
+                char tempC = sChars[left];
+                left++;
+                if (need.containsKey(tempC)) {
+                    if (need.get(tempC).equals(window.get(tempC))) {
+                        valid--;
+                    }
+                    int existCount = window.get(tempC);
+                    window.put(tempC, existCount - 1);
+                }
+            }
+
+
+        }
+
+
+        return minLength == Integer.MAX_VALUE ? "" : s.substring(start, start + minLength);
+    }
 
 
 

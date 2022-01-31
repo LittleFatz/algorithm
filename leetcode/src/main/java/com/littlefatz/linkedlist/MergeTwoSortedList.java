@@ -100,7 +100,7 @@ public class MergeTwoSortedList {
 
 
 
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    public ListNode mergeTwoLists4(ListNode l1, ListNode l2) {
 
         if (l1 == null) {
             return l2;
@@ -137,7 +137,44 @@ public class MergeTwoSortedList {
     }
 
 
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
 
+        if (list1 == null) {
+            return list2;
+        }
+
+        if (list2 == null) {
+            return list1;
+        }
+
+        ListNode index1 = list1;
+        ListNode index2 = list2;
+        ListNode head = new ListNode(0);
+        ListNode currentNode = head;
+
+        while (index1 != null && index2 != null) {
+            if (index1.val <= index2.val) {
+                currentNode.next = index1;
+                index1 = index1.next;
+            } else {
+                currentNode.next = index2;
+                index2 = index2.next;
+            }
+
+            currentNode = currentNode.next;
+
+        }
+
+        if (index1 != null) {
+            currentNode.next = index1;
+        }
+
+        if (index2 != null) {
+            currentNode.next = index2;
+        }
+
+        return head.next;
+    }
 
 
 

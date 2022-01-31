@@ -1,7 +1,9 @@
 package com.littlefatz.slidingwindow;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //https://leetcode-cn.com/problems/find-all-anagrams-in-a-string
 public class FindAllAnagrams {
@@ -48,7 +50,7 @@ public class FindAllAnagrams {
     }
 
 
-    public List<Integer> findAnagrams(String s, String p) {
+    public List<Integer> findAnagrams3(String s, String p) {
         int sLength = s.length();
         int pLength = p.length();
         List<Integer> result = new ArrayList<>();
@@ -85,4 +87,56 @@ public class FindAllAnagrams {
         return result;
 
     }
+
+    public List<Integer> findAnagrams(String s, String p) {
+
+        List<Integer> result = new ArrayList<>();
+        if (s.isEmpty() || p.isEmpty() || s.length() < p.length()) {
+            return result;
+        }
+
+        Map<Character, Integer> need = new HashMap<>();
+        Map<Character, Integer> window = new HashMap<>();
+
+        char[] sChars = s.toCharArray();
+        char[] pChars = p.toCharArray();
+        for (int i  = 0; i < pChars.length; i++) {
+            need.put(pChars[i], need.getOrDefault(pChars[i], 0) + 1);
+        }
+
+        int valid = 0;
+        int left = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = sChars[i];
+            if (need.containsKey(c)) {
+                window.put(c, window.getOrDefault(c, 0) + 1);
+                if (need.get(c).equals(window.get(c))) {
+                    valid++;
+                }
+            }
+
+            while (i - left + 1 >= pChars.length) {
+                if (valid == need.size()) {
+                    result.add(left);
+                }
+                char d = sChars[left++];
+                if (need.containsKey(d)) {
+                    if (need.get(d).equals(window.get(d))) {
+                        valid--;
+                    }
+                    window.put(d, window.get(d) - 1);
+                }
+            }
+
+
+        }
+        return result;
+
+
+    }
+
+
+
+
+
 }
