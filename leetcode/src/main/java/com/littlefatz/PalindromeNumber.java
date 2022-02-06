@@ -20,7 +20,7 @@ public class PalindromeNumber {
 
     }
 
-    public boolean isPalindrome(int x) {
+    public boolean isPalindrome3(int x) {
 
         if (x < 0) {
             return false;
@@ -36,6 +36,22 @@ public class PalindromeNumber {
 
         return x == result;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
