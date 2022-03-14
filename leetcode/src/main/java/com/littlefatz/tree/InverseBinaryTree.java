@@ -39,7 +39,7 @@ public class InverseBinaryTree {
     }
 
 
-    public TreeNode invertTree(TreeNode root) {
+    public TreeNode invertTree4(TreeNode root) {
         if (root == null) {
             return null;
         }
@@ -49,8 +49,8 @@ public class InverseBinaryTree {
         root.left = rightNode;
         root.right = leftNode;
 
-        invertTree(leftNode);
-        invertTree(rightNode);
+        invertTree4(leftNode);
+        invertTree4(rightNode);
 
         return root;
     }
@@ -58,7 +58,20 @@ public class InverseBinaryTree {
 
 
 
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
 
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        root.left = right;
+        root.right = left;
+
+        invertTree(root.left);
+        invertTree(root.right);
+        return root;
+    }
 
 
 
