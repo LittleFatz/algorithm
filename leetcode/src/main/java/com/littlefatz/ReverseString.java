@@ -15,7 +15,7 @@ public class ReverseString {
 
     }
 
-    public void reverseString(char[] s) {
+    public void reverseString3(char[] s) {
 
         int middle = s.length >> 1;
         //注意 middle 位置的处理
@@ -23,6 +23,17 @@ public class ReverseString {
             char temp = s[i];
             s[i] = s[s.length - 1 - i];
             s[s.length - 1 - i] = temp;
+        }
+    }
+
+
+    public void reverseString(char[] s) {
+        int length = s.length;
+        int middle = length / 2;
+        for (int i = 0; i < middle; i++) {
+            char temp = s[i];
+            s[i] = s[length - 1 - i];
+            s[length - 1 - i] = temp;
         }
     }
 

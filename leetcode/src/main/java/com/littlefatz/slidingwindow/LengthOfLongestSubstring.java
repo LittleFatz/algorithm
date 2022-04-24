@@ -163,7 +163,7 @@ public class LengthOfLongestSubstring {
 
     }
 
-    public int lengthOfLongestSubstring(String s) {
+    public int lengthOfLongestSubstring8(String s) {
 
         if (s.isEmpty()) {
             return 0;
@@ -189,7 +189,25 @@ public class LengthOfLongestSubstring {
     }
 
 
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null || s.isEmpty()) {
+            return 0;
+        }
 
+        char[] chars = s.toCharArray();
+        Map<Character, Integer> map  = new HashMap<>();
+        int start = 0;
+        int maxLength = 0;
+        for (int i = 0; i < chars.length; i++) {
+            if (map.containsKey(chars[i])) {
+                start = Math.max(start, map.get(chars[i]) + 1);
+            }
+            map.put(chars[i], i);
+            maxLength = Math.max(maxLength, i - start + 1);
+        }
+
+        return maxLength;
+    }
 
 
 

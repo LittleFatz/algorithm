@@ -48,11 +48,46 @@ public class ReverseNodesInKGroup {
 
         return previous;
     }
+//
+//    public ListNode reverseKGroup3(ListNode head, int k) {
+//
+//        if (head == null) {
+//            return null;
+//        }
+//
+//        ListNode start = head;
+//        ListNode end = head;
+//        for (int i = 0; i < k; i++) {
+//            if (end == null) {
+//                return head;
+//            }
+//            end = end.next;
+//        }
+//        ListNode newHead = reverse(start, end);
+//        ListNode nextHead = reverseKGroup3(end, k);
+//        start.next = nextHead;
+//        return newHead;
+//    }
+
+//    private ListNode reverse(ListNode start, ListNode end) {
+//
+//        ListNode pre = null;
+//        ListNode current = start;
+//        ListNode next;
+//        while(current != end) {
+//            next = current.next;
+//            current.next = pre;
+//            pre = current;
+//            current = next;
+//        }
+//
+//        return pre;
+//
+//    }
 
     public ListNode reverseKGroup(ListNode head, int k) {
-
         if (head == null) {
-            return null;
+            return head;
         }
 
         ListNode start = head;
@@ -63,18 +98,20 @@ public class ReverseNodesInKGroup {
             }
             end = end.next;
         }
+
         ListNode newHead = reverse(start, end);
         ListNode nextHead = reverseKGroup(end, k);
-        start.next = nextHead;
+        start.next = nextHead;//start指向的是reverse(start, end)中链表的队尾元素
         return newHead;
+
     }
 
+    //这个方法只会反转end之前的所有元素,不包括end
     private ListNode reverse(ListNode start, ListNode end) {
-
         ListNode pre = null;
         ListNode current = start;
-        ListNode next;
-        while(current != end) {
+        ListNode next = null;
+        while (current != end) {
             next = current.next;
             current.next = pre;
             pre = current;
@@ -82,8 +119,18 @@ public class ReverseNodesInKGroup {
         }
 
         return pre;
-
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

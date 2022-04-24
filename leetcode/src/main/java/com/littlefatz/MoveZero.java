@@ -54,7 +54,7 @@ public class MoveZero {
 
     }
 
-    public void moveZeroes(int[] nums) {
+    public void moveZeroes4(int[] nums) {
 
         int length = nums.length;
         int fastIndex = 0;
@@ -72,6 +72,37 @@ public class MoveZero {
         }
 
     }
+
+    public void moveZeroes(int[] nums) {
+        int length = nums.length;
+        if (length == 0) {
+            return;
+        }
+
+        int fast = 0;
+        int slow = 0;
+
+        while (fast < length) {
+            if (nums[fast] != 0) {
+                nums[slow++] = nums[fast];
+            }
+            fast++;
+        }
+
+        while (slow < length) {
+            nums[slow++] = 0;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
