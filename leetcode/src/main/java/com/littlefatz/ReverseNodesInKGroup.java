@@ -85,7 +85,7 @@ public class ReverseNodesInKGroup {
 //
 //    }
 
-    public ListNode reverseKGroup(ListNode head, int k) {
+    public ListNode reverseKGroup3(ListNode head, int k) {
         if (head == null) {
             return head;
         }
@@ -122,7 +122,26 @@ public class ReverseNodesInKGroup {
     }
 
 
+    public ListNode reverseKGroup(ListNode head, int k) {
 
+        if (head == null) {
+            return head;
+        }
+
+        ListNode start = head;
+        ListNode end = head;
+        for (int i = 0; i < k; i++) {
+            if (end == null) {
+                return head;
+            }
+            end = end.next;
+        }
+
+        ListNode newHead = reverse(start, end);
+        ListNode nextHead = reverseKGroup(end, k);
+        start.next = nextHead;
+        return newHead;
+    }
 
 
 
