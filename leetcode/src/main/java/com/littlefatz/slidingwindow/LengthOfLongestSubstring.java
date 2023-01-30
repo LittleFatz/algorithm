@@ -4,6 +4,7 @@ import java.util.*;
 
 //https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
 //https://labuladong.gitee.io/algo/2/21/58/
+//https://leetcode.cn/problems/longest-substring-without-repeating-characters/solution/hua-dong-chuang-kou-by-powcai/
 public class LengthOfLongestSubstring {
 
     public int lengthOfLongestSubstring2(String s) {
@@ -189,7 +190,7 @@ public class LengthOfLongestSubstring {
     }
 
 
-    public int lengthOfLongestSubstring(String s) {
+    public int lengthOfLongestSubstring9(String s) {
         if (s == null || s.isEmpty()) {
             return 0;
         }
@@ -210,7 +211,24 @@ public class LengthOfLongestSubstring {
     }
 
 
+    public int lengthOfLongestSubstring(String s) {
 
+        Map<Character, Integer> map = new HashMap<>();
+        int start = 0;
+        int maxLength = 0;
+        char[] chars = s.toCharArray();
+
+        for (int i = 0; i < chars.length; i++) {
+            if (map.containsKey(chars[i])) {
+                start = Math.max(start, map.get(chars[i]) + 1);
+            }
+
+            map.put(chars[i], i);
+            maxLength = Math.max(maxLength, i - start + 1);
+        }
+
+        return maxLength;
+    }
 
 
 

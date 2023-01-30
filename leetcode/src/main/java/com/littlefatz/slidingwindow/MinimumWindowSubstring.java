@@ -203,7 +203,7 @@ public class MinimumWindowSubstring {
 
     }
 
-    public String minWindow(String s, String t) {
+    public String minWindow5(String s, String t) {
         int sLength = s.length();
         int tLength = t.length();
 
@@ -261,7 +261,64 @@ public class MinimumWindowSubstring {
     }
 
 
+    public String minWindow(String s, String t) {
 
+        int sLength = s.length();
+        int tLength = t.length();
+        if (sLength == 0 || tLength == 0) {
+            return "";
+        }
+
+        Map<Character,Integer> need = new HashMap<>();
+        Map<Character,Integer> window = new HashMap<>();
+        char[] tChars = t.toCharArray();
+        for (char c : tChars) {
+            need.put(c, need.getOrDefault(c,0) + 1);
+        }
+
+        int valid = 0;
+        int left = 0;
+        int right = 0;
+        int minLength = Integer.MAX_VALUE;
+        int start = 0;
+
+        char[] sChars = s.toCharArray();
+        while (right < sLength) {
+            char c = sChars[right];
+            if (need.containsKey(c)) {
+                window.put(c, window.getOrDefault(c, 0) + 1);
+                if (need.get(c).equals(window.get(c)) ) {
+                    valid++;
+                }
+            }
+
+            right++;
+
+            while (valid == need.size()) {
+                //因为上面right已经提前往右移动了，所以这里计算长度的时候需要 -1
+                // （right - left + 1） -1
+                if (right - left < minLength) {
+                    minLength = right - left;
+                    start = left;
+                }
+
+                char leftChar = sChars[left];
+                left++;
+
+                if (need.containsKey(leftChar)) {
+                    window.put(leftChar, window.get(leftChar) - 1);
+                    if (window.get(leftChar) < need.get(leftChar)) {
+                        valid--;
+                    }
+                }
+            }
+
+        }
+
+        return minLength == Integer.MAX_VALUE ? "" : s.substring(start, start + minLength);
+
+
+    }
 
 
 
