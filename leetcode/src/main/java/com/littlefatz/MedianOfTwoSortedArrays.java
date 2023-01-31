@@ -126,6 +126,9 @@ public class MedianOfTwoSortedArrays {
 
     private double findKth(int[] nums1, int[] nums2, int index1, int index2, int k) {
 
+        /**
+         * 能够进入这个 if 条件，证明 nums1 所有元素已经被排除了，中位数只可能出现在 nums2中
+         */
         if (index1 >= nums1.length) {
             return nums2[index2 + k - 1];
         }
@@ -150,5 +153,43 @@ public class MedianOfTwoSortedArrays {
 
     }
 
+
+
+//    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+//
+//        int length1 = nums1.length;
+//        int length2 = nums2.length;
+//        int totalLength = length1 + length2;
+//
+//        if (totalLength % 2 == 1) {
+//            return findKth(nums1, nums2, 0 ,0, totalLength / 2 + 1);
+//        } else {
+//            return (findKth(nums1, nums2, 0 ,0, totalLength / 2) + findKth(nums1, nums2, 0 ,0, totalLength / 2 + 1)) / 2;
+//        }
+//    }
+//
+//    private double findKth(int[] nums1, int[] nums2, int index1, int index2, int k) {
+//        if (index1 >= nums1.length) {
+//            return nums2[index2 + k - 1];
+//        }
+//
+//        if (index2 >= nums2.length) {
+//            return nums1[index1 + k - 1];
+//        }
+//
+//        if (k == 1) {
+//            return Math.min(nums1[index1], nums2[index2]);
+//        }
+//
+//        int value1 = (index1 + k/2 - 1) >= nums1.length ? Integer.MAX_VALUE : nums1[index1 + k/2 - 1];
+//        int value2 = (index2 + k/2 - 1) >= nums2.length ? Integer.MAX_VALUE : nums2[index2 + k/2 - 1];
+//
+//        if (value1 < value2) {
+//            return findKth(nums1, nums2, index1 + k/2, index2, k - k/2);
+//        }
+//
+//        return findKth(nums1, nums2, index1, index2 + k/2, k - k/2);
+//
+//    }
 
 }
