@@ -23,26 +23,58 @@ public class ContaineWithMostWater {
 
     }
 
+//    public int maxArea(int[] height) {
+//
+//        int right = height.length - 1;
+//        int left = 0;
+//        int result = 0;
+//
+//        while (left < right) {
+//            int area = (right - left) * Math.min(height[left], height[right]);
+//            result = Math.max(result, area);
+//            if (height[left] < height[right]) {
+//                left++;
+//            } else {
+//                right--;
+//
+//            }
+//
+//        }
+//
+//        return result;
+//    }
+
     public int maxArea(int[] height) {
 
-        int right = height.length - 1;
-        int left = 0;
         int result = 0;
+        int left = 0 ;
+        int right = height.length - 1;
 
         while (left < right) {
+
             int area = (right - left) * Math.min(height[left], height[right]);
-            result = Math.max(result, area);
+            result = Math.max(area, result);
             if (height[left] < height[right]) {
                 left++;
             } else {
                 right--;
-
             }
-
         }
 
         return result;
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

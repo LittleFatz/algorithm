@@ -162,7 +162,7 @@ public class LongestPalindromicSubstring {
     }
 
 
-    public String longestPalindrome(String s) {
+    public String longestPalindrome4(String s) {
 
         if (s == null || s.length() == 0) {
             return s;
@@ -199,7 +199,42 @@ public class LongestPalindromicSubstring {
     }
 
 
+    public String longestPalindrome(String s) {
 
+        if (s == null || s.length() == 0) {
+            return s;
+        }
+
+        int length = s.length();
+        char[] chars = s.toCharArray();
+        boolean[][] dp = new boolean[length][length];
+
+        for (int k = 0; k < length; k++) {
+            dp[k][k] = true;
+        }
+
+        int maxLength = 1;
+        int startIndex = 0;
+        for (int i = length - 2; i >= 0; i--) {
+            for (int j = i + 1; j < length; j++) {
+                if (chars[i] == chars[j]) {
+                    if (j - i + 1 <= 3) {
+                        dp[i][j] = true;
+                    } else {
+                        dp[i][j] = dp[i+1][j-1];
+                    }
+                }
+
+                if (dp[i][j] && (j - i + 1) > maxLength) {
+                    maxLength = j - i + 1;
+                    startIndex = i;
+                }
+
+            }
+        }
+
+        return s.substring(startIndex, startIndex + maxLength);
+    }
 
 
 
