@@ -85,7 +85,7 @@ public class ValidParenthese {
         }
     }
 
-    public boolean isValid(String s) {
+    public boolean isValid3(String s) {
 
         int length = s.length();
         char[] chars = s.toCharArray();
@@ -122,7 +122,22 @@ public class ValidParenthese {
         }
     }
 
+    public boolean isValid(String s) {
+        int length = s.length();
+        char[] chars = s.toCharArray();
 
+
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < length; i++) {
+            if (isLeft(chars[i])) {
+                stack.push(chars[i]);
+            } else if (stack.isEmpty() || !match(stack.pop(), chars[i])) {
+                return false;
+            }
+        }
+
+        return stack.isEmpty();
+    }
 
 
 
