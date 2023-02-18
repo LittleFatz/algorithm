@@ -118,30 +118,57 @@ public class GenerateParentheses {
 //
 //    }
 
+//    private List<String> result = new ArrayList<>();
+//
+//    public List<String> generateParenthesis(int n) {
+//
+//        if (n == 0) {
+//            return result;
+//        }
+//
+//        generate(0, 0, n, "");
+//        return result;
+//    }
+//
+//    private void generate(int left, int right, int n, String s) {
+//
+//        if (left == n && right == n) {
+//            result.add(s);
+//        }
+//
+//        if (left < n) {
+//            generate(left + 1, right, n, s + "(");
+//        }
+//
+//        if (right < left) {
+//            generate(left, right + 1, n, s + ")");
+//        }
+//    }
+
     private List<String> result = new ArrayList<>();
 
     public List<String> generateParenthesis(int n) {
-
         if (n == 0) {
             return result;
         }
 
         generate(0, 0, n, "");
+
         return result;
     }
 
-    private void generate(int left, int right, int n, String s) {
+    private void generate(int left, int right, int n, String path) {
 
         if (left == n && right == n) {
-            result.add(s);
+            result.add(new String(path));
         }
 
         if (left < n) {
-            generate(left + 1, right, n, s + "(");
+            generate(left + 1, right, n, path + "(");
         }
 
         if (right < left) {
-            generate(left, right + 1, n, s + ")");
+            generate(left, right + 1, n, path + ")");
         }
     }
 
