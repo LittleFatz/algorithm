@@ -89,6 +89,51 @@ public class MergeKSortedList {
 //
 //    }
 
+//
+//    public ListNode mergeKLists(ListNode[] lists) {
+//
+//        if (lists == null || lists.length == 0) {
+//            return null;
+//        }
+//
+//        return mergeKLists(lists, 0, lists.length - 1);
+//
+//    }
+//
+//    private ListNode mergeKLists(ListNode[] lists, int start, int end) {
+//        if (start == end) {
+//            return lists[start];
+//        }
+//
+//        int middle = start + (end - start) / 2;
+//        ListNode leftList = mergeKLists(lists, start, middle);
+//        ListNode rightList = mergeKLists(lists, middle + 1, end);
+//
+//        return mergeTwoLists(leftList, rightList);
+//
+//    }
+//
+//    private ListNode mergeTwoLists(ListNode leftList, ListNode rightList) {
+//        if (leftList == null) {
+//            return rightList;
+//        }
+//
+//        if (rightList == null) {
+//            return leftList;
+//        }
+//
+//        if (leftList.val <= rightList.val) {
+//            ListNode listNode = mergeTwoLists(leftList.next, rightList);
+//            leftList.next = listNode;
+//            return leftList;
+//        } else {
+//            ListNode listNode = mergeTwoLists(leftList, rightList.next);
+//            rightList.next = listNode;
+//            return rightList;
+//        }
+//
+//    }
+
 
     public ListNode mergeKLists(ListNode[] lists) {
 
@@ -96,24 +141,26 @@ public class MergeKSortedList {
             return null;
         }
 
-        return mergeKLists(lists, 0, lists.length - 1);
+        ListNode result = mergeLists(lists, 0, lists.length - 1);
+        return result;
 
     }
 
-    private ListNode mergeKLists(ListNode[] lists, int start, int end) {
+    private ListNode mergeLists(ListNode[] lists, int start, int end) {
+
         if (start == end) {
             return lists[start];
         }
 
-        int middle = start + (end - start) / 2;
-        ListNode leftList = mergeKLists(lists, start, middle);
-        ListNode rightList = mergeKLists(lists, middle + 1, end);
+        int middle = (start + end) / 2;
+        ListNode leftList = mergeLists(lists, start, middle);
+        ListNode rightList = mergeLists(lists, middle + 1, end);
 
-        return mergeTwoLists(leftList, rightList);
-
+        return merge2Lists(leftList, rightList);
     }
 
-    private ListNode mergeTwoLists(ListNode leftList, ListNode rightList) {
+    private ListNode merge2Lists(ListNode leftList, ListNode rightList) {
+
         if (leftList == null) {
             return rightList;
         }
@@ -123,16 +170,15 @@ public class MergeKSortedList {
         }
 
         if (leftList.val <= rightList.val) {
-            ListNode listNode = mergeTwoLists(leftList.next, rightList);
+            ListNode listNode = merge2Lists(leftList.next, rightList);
             leftList.next = listNode;
             return leftList;
         } else {
-            ListNode listNode = mergeTwoLists(leftList, rightList.next);
+            ListNode listNode = merge2Lists(leftList, rightList.next);
             rightList.next = listNode;
             return rightList;
         }
-
-
-
     }
+
+
 }
