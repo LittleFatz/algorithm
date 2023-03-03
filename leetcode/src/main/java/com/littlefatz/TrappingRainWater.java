@@ -156,7 +156,7 @@ public class TrappingRainWater {
 
     }
 
-    public int trap(int[] height) {
+    public int trap6(int[] height) {
 
         int length = height.length;
         if (length <= 1) {
@@ -183,6 +183,48 @@ public class TrappingRainWater {
 
         return maxRain;
     }
+
+
+    public int trap(int[] height) {
+
+        int length = height.length;
+        if (length <= 1) {
+            return 0;
+        }
+
+        int leftIndex = 0;
+        int rightIndex = length - 1;
+        int leftMax = height[0];
+        int rightMax = height[length - 1];
+        int totalRain = 0;
+
+        while (leftIndex < rightIndex) {
+            if (height[leftIndex] <= height[rightIndex]) {
+                leftMax = Math.max(height[leftIndex], leftMax);
+                totalRain += leftMax - height[leftIndex];
+                leftIndex++;
+            } else {
+                rightMax = Math.max(height[rightIndex], rightMax);
+                totalRain += rightMax - height[rightIndex];
+                rightIndex--;
+            }
+        }
+
+        return totalRain;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
